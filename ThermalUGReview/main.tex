@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{tabularx}
+
+\renewcommand\cfoot{\page}
+
+\title{\emph{Brief} Thermal Physics Review}
+\author{Jalen Cates}
+\date{April 2019}
+
+\begin{document}
+
+\maketitle
+
+\emph{Disclaimer:} These are what I am personally making for my review, so I make no guarantee this is helpful, complete, or anything. Please tell me if anything is false on it or should be added. Good luck!
+
+\input{ThermalSections/section_beforemidterm.tex}
+\input{ThermalSections/section_mainpotentials.tex}
+\input{ThermalSections/section_energymin.tex}
+\input{ThermalSections/section_canonical.tex}
+\input{ThermalSections/section_idealgas.tex}
+\input{ThermalSections/section_maxwell.tex}
+\input{ThermalSections/section_grandcanonical.tex}
+\input{ThermalSections/section_distributions.tex}
+\input{ThermalSections/section_degengas.tex}
+
+\input{appendix_math.tex}
+
+\end{document}

@@ -1,0 +1,85 @@
+\section{Ideal Gas \& Radiation in Canonical Formalism}
+
+\emph{Kittel \& Kroemer: Chapter 4}
+\begin{itemize}
+    \item How to derive from Canonical Formalism
+    \item "Basic" radiation flux laws
+\end{itemize}
+
+\subsection{Ideal Gas}
+This is a gas of non-interacting atoms in the classical regime, which corresponds to high temperature and low particle density. The derivation uses Boltzmann factors with the energy of a particle being given by "particle in a box" equation with quantum numbers neglecting spin and structural properties. It assumes that the particles' orbitals do not match, so the particles are \emph{not} identical.
+
+\textbf{Energy:} 
+\[
+U=\frac{3}{2} N \tau = \frac{3}{2} N k_B T
+\]
+
+\textbf{Ideal Gas Law:} 
+\[
+pV = N\tau = N k_B T
+\]
+
+\textbf{Summary of derivation:}
+\begin{table}[!hbtp]
+    \centering
+    \begin{tabular}{c | c p{4cm}}
+        \toprule
+        1 & $f(\epsilon) = \lambda e^{-\epsilon/\tau}$    & Occupancy of an orbital in the classical limit. \\
+        \midrule
+        2 & $\lambda = \frac{N}{\sum e^{-\epsilon/\tau}}$ & Given N, this equation determines $\lambda$ in the limit. \\
+        \midrule
+        3 & $\epsilon_n = \frac{\hbar^2}{2M} \bigg( \frac{\pi n}{V^{1/3}} \bigg)^2 $ & Energy of free particle orbital of quantum number n in cube of volume V. \\
+        \midrule
+        4 & $\sum_n e^{-\epsilon_n/\tau} = \frac{\pi}{2} \int dn n^2 e^{-\epsilon/\tau} $ & Transformation from sum to integral. \\
+        \midrule
+        5 & $\lambda = \frac{N}{n_Q V}$ & Result of integration after subsitution into (2). \\
+        \midrule
+        6 & $n_Q = (M\tau/2\pi \hbar^2)^{3/2}$ & Definition of quantum concentration. \\
+        \midrule
+        7 & $\mu = \tau \log{(n/n_Q)}$ & Expression for chemical potential. \\
+        \midrule
+        8 & $F = \int dN \mu(N,\tau,V) = N\tau [\log{(n/n_Q)} - 1]$ & Helmholtz Potential is found in terms of known values. \\
+        \midrule
+        9 & $p = -(\partial F/\partial V)_{\tau, N} = N\tau/V $ & And the final expression for the pressure is found. \\
+        \bottomrule
+    \end{tabular}
+    \caption{Derivation of Ideal Gas Law}
+    \label{tab:ideal}
+\end{table}
+
+
+
+\subsection{Radiation}
+Describes the electromagnetic spectrum within a cavity in thermal equilibrium. A state with $s$ photons has energy $\epsilon_s = s \hbar \omega$. The results are known as the Planck Distribution and the Stefan-Boltzmann Law. These results are similar to the results for phonons (see Debye theory) and electrical noise.
+
+\textbf{Partition Function: }The expression of energy above is plugged in to get
+\[
+Z = \sum_{s=0}^\infty e^{-s\hbar \omega/\tau}
+\]
+Which has a form that lends itself to the substituion $x\equiv \exp{-\hbar \omega /\tau}$. The sum of $x^s$ is $1/(1-x)$, so
+\[
+Z = \frac{1}{1-e^{-\hbar \omega/\tau}}
+\]
+
+\textbf{Planck Distribution Function: } thermal average number of photons in a single mode of frequency $\omega$. The result is
+\[
+\langle s \rangle = \frac{1}{e^{\hbar \omega/\tau}-1}
+\]
+\textbf{Thermal Average Occupancy:} Calculated in the normal way to give
+\[
+\langle \epsilon \rangle = \langle s \rangle \hbar \omega = 
+\frac{\hbar \omega}{e^{\hbar \omega/\tau}-1}
+\]
+\textbf{Stefan-Boltzmann Law of Radiation:} Important part of this result is the $\tau^4$ proportionality. The energy density is
+\[
+\frac{U}{V} = \frac{\pi^2}{15\hbar^3c^3} \tau^4
+\]
+which can be manipulated to give the way it is normally written.
+\[
+J_v = \sigma_B T^4  \hspace{15pt} \sigma_B \equiv \frac{\pi^2k_B^2}{60\hbar^3c^2}
+\]
+\textbf{Planck Radiation Law:} Spectral density $u_\omega$ is the energy per unit volume per unit frequency range. Rewriting the distribution in terms of frequency gives this density as
+\[
+u_\omega = \frac{\hbar}{\pi^2c^3} \frac{\omega^3}{e^{\hbar \omega/\tau}-1}
+\]
+
