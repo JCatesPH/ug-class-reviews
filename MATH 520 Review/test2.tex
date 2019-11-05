@@ -1,0 +1,220 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Second Test}
+
+\begin{itemize}
+    \item The Simplex Algorithm: canonical forms and tableaus; choice of entering and leaving variables; pivoting; termination criteria; initialization and the two-phase method.
+    \item How to find the set of all optimal solutions of a linear program. See Problem 1 in these notes for a nice example.
+    \item Duality: weak/strong theorems, how to construct the dual of a given primal, Fundamental Theorem of LP. See GKT 3.1.2, 4.1, 4.2, 5.2 (and problems at end of each section). Luenberger and Ye Chapter 4.
+    \item Complementary slackness conditions. See GKT 4.3.1. Suggested problem: GKT 4.3.1 Problem 1
+\end{itemize}
+
+
+
+%--------------------------------------------%
+\section{Simplex Algorithm}
+
+
+%--------------------------------------------%
+\subsection{Tableau Representation}
+A \textit{tableau} corresponding to basis $B$ is a linear system with variables $(\Vec{x}, z)\in\mathbf{R}^{n+1}$, where
+\begin{enumerate}
+    \item Equations are solved for the basic variables.
+    \item Basic variables are eliminated from the objective row.
+    \item All variables are on the LHS of equation, with constants on RHS.
+\end{enumerate}
+
+\subsubsection{General Form of Tableau}
+\begin{align}
+    z - \sum_{j\in N} \Bar{c}_j x_j & = \Bar{v} \\
+    x_i - \sum_{j\in N} \Bar{a}_{ij} x_j & = \Bar{b}_i \quad \forall\; i\in B
+\end{align}
+This tells us everything we need to know.
+\begin{enumerate}
+    \item $x_B = \Bar{b}$
+    \item $\Bar{b}\geq 0 \implies x_B$ is feasible
+    \item Objective value for $B$ is $\Bar{v}$
+    \item $\Bar{c}_k>0 : k\in N \implies$ increasing $x_k$ will increase the objective value.
+\end{enumerate}
+
+
+%--------------------------------------------%
+\subsection{Entering and Leaving Variables}
+The tableau for a basis will tell you which variables increase the objective value by entering the basis. \textbf{Bland's rule}, however, ensure convergence by selecting the variable with the smallest index to enter the basis. The variable that leaves is chosen by the \textbf{ratio test}. This test looks like the expression below for the entering variable $x_k$.
+\begin{equation}
+    t = \min_{\Bar{a}_{ik}>0}
+    \Big\{\frac{b_i}{\Bar{a}_{ik}}\Big\}, \quad i \in B
+\end{equation}
+
+
+%--------------------------------------------%
+\subsection{Pivoting}
+Suppose we have a tableau corresponding to a basis, and we want $k$ to enter basis $B$ and $r$ to leave. The algorithm to \textit{pivot} the tableau is
+\begin{enumerate}
+    \item Eliminate $x_k$ from the $i$th row.
+    \item Eliminate $x_k$ from the objective row.
+    \item Rescale the $r$th row.
+\end{enumerate}
+Gaussian Elimination is the best way to do this.
+
+
+%--------------------------------------------%
+\subsection{The Simplex Algorithm Steps}
+
+\begin{enumerate}
+    \item Write the feasible tableau corresponding to initial basis $B$.
+    \item \textbf{Check for optimality}. If $\Bar{c}_j\leq 0 \,\forall\; j\in N$, then \textbf{STOP}. $B$ is the optimal basis.
+    \item \textbf{Choose entering variable}. Choose $k\in N$ such that $\Bar{c}_k>0$.
+    \item \textbf{Check for unboundedness}. If $\Bar{a}_{ik}\leq 0 \,\forall\; i\in B$, then \textbf{STOP}. LP is unbounded.
+    \item \textbf{Choose a leaving variable}. Choose $r\in B$ such that $t = \min_{\Bar{a}_{ik}>0}
+    \Big\{\frac{b_i}{\Bar{a}_{ik}}\Big\}$.
+    \item \textbf{Pivot}. Find tableau for new basis. Repeat.
+\end{enumerate}
+
+
+
+%--------------------------------------------%
+\section{Finding Feasible Basis}
+The Simplex Algorithm requires that you have a feasible basis at the beginning. This section shows a way to find a feasible basis to initialize the Simplex Algorithm.
+
+
+%--------------------------------------------%
+\subsection{Special Case of SIF Problem}
+Suppose we have a LP in SIF,
+\begin{equation}
+    \max\{\Vec{c}^T\Vec{x}\,:\, \Vec{Ax}\leq \Vec{b},\, \Vec{x}\geq\Vec{0}\}
+\end{equation}
+where $\Vec{A}\in\Vec{R}^{m\times n}$. A natural basis comes from adding slack variables. The equivalent problem is then
+\begin{equation}
+    \max\{\Vec{c}^T\Vec{x}\,:\, \Vec{Ax}+\Vec{Is} =\Vec{b},\, \Vec{x},\Vec{s}\geq\Vec{0}\}
+\end{equation}
+If $b_i\geq 0$ for $i=1,2,\dots,m$, then the basis $B=\{n+1,n+2,\dots,n+m\}$ is a feasible basis.
+
+
+%--------------------------------------------%
+\subsection{Auxiliary Problem}
+Suppose we have a problem $(P)$ in SEF,
+\begin{equation}
+    \max\{\Vec{c}^T\Vec{x}\,:\, \Vec{Ax}=\Vec{b},\, \Vec{x}\geq\Vec{0}\}
+\end{equation}
+We can introduce the auxiliary variable vector $\Vec{u}\in\Vec{R}^{m}$ to form the \textbf{auxiliary problem} $(A)$.
+\begin{align}
+        \max_{\Vec{x},\Vec{u}} \quad & w = -\sum_{i=1}^m u_i & \\
+        \text{st.} \quad & \sum_{j=1}^n a_{ij}x_j + u_i = b_i & i=1,2,\dots,m \\
+         & \Vec{x},\Vec{u}\geq \Vec{0}
+\end{align}
+
+\begin{theorem}
+The problem in SEF is feasible if and only if the auxiliary problem has optimal value equal to 0.
+\end{theorem}
+
+The auxiliary problem will either give a feasible basis for $(P)$ or a certificate of infeasibility.
+
+
+
+%--------------------------------------------%
+\section{Degeneracy and Finite Termination}
+A basis is \textit{degenerate} if there are more than $(n-m)$ zero entries in the basic solution. When the solution corresponding to degenerate basis $B$ is optimal, then there are a set of solutions lying on a polytope. To characterize the optimal solution set, first write the objective function for the optimal tableau. From this, you can can conclude which nonbasic entries must be zero for optimality to hold. If there are nonbasic values that may take on non-zero values, then you can form a system of equations that require feasibility to hold. This system gives the set as vectors with parameters that satisfy the inequalities.
+
+
+
+%--------------------------------------------%
+\section{Duality Theory}
+
+
+%--------------------------------------------%
+\subsection{Weak Duality}
+Suppose we have the maximization problem $(P_{max})$,
+\begin{align}
+        \max_{\Vec{x}} \quad & \Vec{c}^T\Vec{x} & \\
+        \text{st.} \quad & \Vec{Ax}\; ?\; \Vec{b} &  \\
+         & \Vec{x}\; ?\; \Vec{0}
+\end{align}
+The corresponding dual problem is then $(P_{min})$,
+\begin{align}
+        \max_{\Vec{y}} \quad & \Vec{b}^T\Vec{y} & \\
+        \text{st.} \quad & \Vec{A}^T\Vec{y}\; ?\; \Vec{c} &  \\
+         & \Vec{y}\; ?\; \Vec{0}
+\end{align}
+
+The question marks in the problems above are chosen according to table \ref{tab:primal-dual-pairs}.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{l|r}
+         $(P_{max})$ & $(P_{min})$ \\
+         \hline
+         $\leq$ constraint & $\geq 0$ variable \\ 
+         $=$ constraint & free variable \\
+         $\geq$ constraint & $\leq 0$ variable \\
+         $\geq 0$ variable & $\geq$ constraint \\ 
+         free variable & $=$ constraint \\ 
+         $\leq 0$ variable & $\leq$ constraint 
+    \end{tabular}
+    \caption{Primal-Dual Pairs}
+    \label{tab:primal-dual-pairs}
+\end{table}
+
+
+\begin{theorem}
+Let $(P)$ and $(D)$ be a primal-dual pair where $(P)$ is a maximization problem and $(D)$ a minimization problem. Let $\Vec{\Bar{x}}$ and $\Vec{\Bar{y}}$ be feasible solutions for $(P)$ and $(D)$, respectively:
+\begin{enumerate}
+    \item Then $\Vec{c}^T\Bar{\Vec{x}}\leq\Vec{b}^T\Vec{\Bar{y}}$
+    \item If $\Vec{c}^T\Bar{\Vec{x}}=\Vec{b}^T\Vec{\Bar{y}}$, then $\Vec{\Bar{x}}$ and $\Vec{\Bar{y}}$ are optimal solutions to $(P)$ and $(D)$, respectively.
+\end{enumerate}
+\end{theorem}
+
+
+%--------------------------------------------%
+\subsection{Strong Duality}
+This type of duality fortunately always applies to linear programs.
+
+\begin{theorem}[Strong Duality] \label{th:strongdual}
+Let $(P)$ and $(D)$ be a primal-dual pair. If $(P)$ there exists and optimal solution $\Vec{\Bar{x}}$, then there exists an optimal solution $\Vec{\Bar{y}}$ of $(D)$. Moreover, the value of $\Vec{\Bar{x}}$ in $(P)$ equals the value of $\Vec{\Bar{y}}$ in $(D)$.
+\end{theorem}
+
+The \textbf{duality gap} for $(P)$ and $(D)$ if Theorem \ref{th:strongdual} does not hold is
+\begin{equation}
+    \Vec{b}^T\Vec{\Bar{y}} - \Vec{c}^T\Bar{\Vec{x}}
+\end{equation}
+Theorem \ref{th:strongdual} and other corollaries give us the following table of outcomes.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lr|ccc}
+                     & Primal & & & \\
+        Dual         &        & Optimal Sol. & Unbounded & Infeasible \\
+        \hline
+        Optimal Sol. &        & \textbf{possible} & impossible          & impossible \\
+        Unbounded    &        & impossible        & impossible          & \textbf{possible} \\
+        Infeasible   &        & impossible        & \textbf{possible}   & \textbf{possible}
+    \end{tabular}
+    \caption{Outcomes for primal-dual pairs}
+    \label{tab:dualoutcomes}
+\end{table}
+
+
+%--------------------------------------------%
+\subsection{Complementary Slackness}
+% 4.3 is on this and geometry of optimal solutions.
+\begin{theorem}[Complmentary Slackness Theorem]
+Let $(P)$ and $(D)$ be an arbitrary primal-dual pair. Also, let $\Bar{\Vec{x}}$ be a feasible solution for $(P)$ and $\Bar{\Vec{y}}$ be a feasible solution for $(D)$. Then $\Bar{\Vec{x}}$ is optimal for $(P)$ and $\Bar{\Vec{y}}$ is optimal for $(D)$ if and only if the conditions below hold.
+\begin{enumerate}
+    \item $\Bar{x}_j=0$  \textbf{or}  $\sum_{i=1}^m a_{ij}\Bar{y}_i=c_j$  for all $j=1,2,\dots,n$
+    \item $\Bar{y}_i=0$  \textbf{or}  $\sum_{j=1}^n a_{ij}\Bar{x}_j=b_i$  for all $i=1,2,\dots,m$
+\end{enumerate}
+\end{theorem}
+
+
+
+%--------------------------------------------%
+%\section{Example Problems}
+%FILL
+
+%--------------------------------------------%
+%\subsection{Two-Phase Simplex Example}
+% One from book or from slides.
+
+%--------------------------------------------%
+%\subsection{Characterization of Optimal Solutions Example}
+% Ones from slides
+
+%\subsection{Primal-Dual Examples}

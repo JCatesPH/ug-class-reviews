@@ -1,0 +1,541 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Eigenvalue Problems}
+Review hyperbolic trigonometric functions if needed. A few are
+\begin{align*}
+    \cosh x & = \frac{e^x + e^{-x}}{2} \\
+    \sinh x & = \frac{e^x - e^{-x}}{2} \\
+    \tanh x & = \frac{e^x - e^{-x}}{e^x + e^{-x}} 
+\end{align*}
+Their derivatives are
+\begin{align*}
+    \frac{d}{dx}\cosh x & = \sinh x \\
+    \frac{d}{dx}\sinh x & = \cosh x \\
+    \frac{d}{dx}\tanh x & = \sech ^2 x 
+\end{align*}
+
+
+
+%--------------------------------------------%
+\section{Boundary Value Problems}
+A \emph{two-point boundary value problem} is one with second-order linear differential equation
+\begin{equation}
+    y'' + p(x) y'+ q(x) y = f(x)\,,\quad a<x<b
+\end{equation}
+that satisfies the boundary conditions
+\begin{align*}
+    a_{11} y(a) & +  a_{12} y'(a) +  b_{11} y(b) +  b_{12} y(b) = c_1 \\
+    a_{21} y(a) & +  a_{22} y'(a) +  b_{21} y(b) +  b_{22} y(b) = c_2 \\
+\end{align*}
+
+The problem is \emph{homogeneous} if $c_1=c_2=0$; otherwise, it is \emph{nonhomogeneous}.
+
+The types of boundary conditions are summarized in Table \ref{tab:bc-types}.
+\begin{center}
+\begin{tabular}[t]{lc} \label{tab:bc-types}
+ Name & Condition \\
+ \hline
+ Dirichlet & $y(a)=c_1, \quad y(b)=c_2$ \\ 
+ Neumann   & $y'(a)=c_1, \quad y'(b)=c_2$ \\ 
+ Mixed     & $a_1 y(a) + a_2 y'(a)=c_1$ \\
+           & $b_1 y(b) + b_2 y'(b)=c_2$   \\
+ Periodic  & $y(-T)=y(T), \quad y'(-T)=y'(T)$ 
+\end{tabular}
+\end{center}
+
+
+
+%--------------------------------------------%
+\section{Harmonic Oscillator}
+The first example of an eigenvalue problem is that of a harmonic oscillator. In class, it was written
+\begin{equation} \label{eq:harmonic-osc}
+    y''+ \lambda y = 0 \; : \; \lambda = const.
+\end{equation}
+Depending on your background, you may or may not recognize it as\footnote{This is the way \emph{Classical Mechanics} by Taylor writes it.}
+\begin{equation*}
+    m \Ddot{x} = -k x \; : \; m,k = const.
+\end{equation*}
+\begin{equation*}
+    \omega_0 \equiv \sqrt{\frac{k}{m}} \implies \Ddot{x} + \omega_0^2 x = 0
+\end{equation*}
+The oscillator has solutions from Equation \ref{eq:homo-const}, which forms three cases.
+
+%--------------------------------------------%
+\subsubsection{Case 1: Real, Distinct Roots ($\lambda = -\mu^2 < 0$)}
+This case is one where the spring is not a \emph{returning force}, and the mass is being continually pushed away.
+\begin{equation} \label{harmonic-realroots}
+    y(x) = c_1 e^{\mu x} + c_2 e^{-\mu x}
+\end{equation}
+\begin{center}
+    \textbf{or}
+\end{center}
+\begin{equation} \label{harmonic-realroots}
+    y(x) = A \cosh{(\mu x)} + B \sinh{(-\mu x)}
+\end{equation}
+
+%--------------------------------------------%
+\subsubsection{Case 2: Repeated Roots ($\lambda = 0$)}
+This case is one where there is no spring at all.
+\begin{equation}
+    y(x) = Ax + B
+\end{equation}
+
+%--------------------------------------------%
+\subsubsection{Case 3: Complex Roots ($\lambda = \mu^2 > 0$)}
+This case corresponds to oscillatory motion in the well-known way.
+\begin{equation} \label{harmonic-realroots}
+    y(x) = c_1 \cos{(\mu x)} + c_2 \sin{(-\mu x)}
+\end{equation}
+
+
+One usually checks the case of real roots, the case of repeated roots, and the case of complex roots in an eigenvalue problem. These cases may yield trivial solutions based on the boundary values.
+
+
+%--------------------------------------------%
+\subsection{Boundary Conditions' Eigenfunctions}
+Robin (mixed) conditions can get very complicated, but the simpler cases are listed here.
+%--------------------------------------------%
+\subsubsection{Dirichlet Boundary Conditions}
+\begin{equation*}
+    y(0)=y(L)=0
+\end{equation*}
+\begin{equation} \label{eq:HO-dirichlet-eigenvalues}
+    \lambda_n = \Big(\frac{n\pi}{L}\Big)^2, \quad n=1,2,3,\dots
+\end{equation}
+\begin{equation}\label{eq:HO-dirichlet-eigenfuncs}
+    \phi_n(x)=a_n \sin\Big(\frac{n\pi}{L}x\Big)
+\end{equation}
+
+%--------------------------------------------%
+\subsubsection{Neumann Boundary Conditions}
+\begin{equation*}
+    y'(0)=y'(L)=0
+\end{equation*}
+\begin{equation} \label{eq:HO-neumann-eigenvalues}
+    \lambda_n = \Big(\frac{n\pi}{L}\Big)^2, \quad n=0,1,2,\dots
+\end{equation}
+\begin{equation}\label{eq:HO-neumann-eigenfuncs}
+    \phi_n(x)=a_n \cos\Big(\frac{n\pi}{L}x\Big)
+\end{equation}
+
+%--------------------------------------------%
+\subsubsection{Periodic Boundary Conditions}
+\begin{equation*}
+    y(-\pi)=y(\pi)=0, \quad y'(-\pi)=y'(\pi)=0
+\end{equation*}
+\begin{equation} \label{eq:HO-periodic-eigenvalues}
+    \lambda_n = n^2, \quad n=0,1,2,\dots
+\end{equation}
+\begin{equation}\label{eq:HO-periodic-eigenfuncs}
+    \phi_0(x)=A_0, \quad \phi_n = A_n\cos{nx} + B_n\sin{nx}
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Regular Sturm-Liouville BVPs}
+A \textbf{Regular Sturm-Liouville (RSL)} boundary value problem has the form:
+\begin{align} \label{eq:RSL-general}
+    (p(x)y'(x))' + q(x)y(x) + \lambda r(x)y(x) & = 0, \quad a < x < b \\
+    a_1 y(a) + a_2 y'(a) & = 0 \\
+    b_1 y(b) + b_2 y'(b) & = 0 
+\end{align}
+
+
+%--------------------------------------------%
+\subsection{Rewriting BVP as RSL}
+Suppose we have the general second-order homogeneous linear differential equation.
+\begin{equation} \label{eq:general-solode}
+    A_2(x)y''(x) + A_1(x)y'(x) + A_0(x)y(x) + \lambda \rho(x)y(x) = 0
+\end{equation}
+This equation can be written as a RSL problem by using an integrating factor $\mu$.
+\begin{equation}\label{eq:RSL-integratingfactor}
+    \mu(x) \equiv \frac{1}{A_2(x)}\, e^{\int A_1(x)/A_2(x)\,dx}
+\end{equation}
+This gives a RSL problem where
+\begin{equation}
+    p=\mu A_2,\quad q=\mu A_0,\quad r=\mu\rho
+\end{equation}
+
+
+%--------------------------------------------%
+\subsection{Theorems on RSLs}
+Let
+\begin{equation}\label{eq:RSL-operator}
+    L[y](x) \equiv  (p(x)y'(x))' + q(x)y(x)
+\end{equation}
+
+\begin{theorem}[Lagrange's Identity]
+Let $u$ and $v$ be functions having continuous second derivatives on the interval $[a,b]$. Then,
+\begin{equation}
+    uL[v] - vL[u] = \frac{d}{dx} \Big(pW[u,v]\Big)
+\end{equation}
+where $W[u,v]=uv'-vu'$ is the Wronskian of $u$ and $v$.
+\end{theorem}
+
+This theorem has a corollary called \textbf{Green's Formula} for the operator. This gives the equation from class.
+
+\begin{theorem}
+Let $u$ and $v$ be functions having continuous second derivatives on the interval $[a,b]$ that satisfy the boundary conditions in \ref{eq:RSL-general}. Then,
+\begin{equation}
+    \langle u, L[v] \rangle = \langle L[u], v \rangle
+\end{equation}
+\end{theorem}
+
+\begin{theorem}
+Eigenvalues and eigenfunctions for the RSL BVP are real-valued.
+\end{theorem}
+
+\begin{theorem}
+All eigenvalues for the RSL BVP are simple. This means all eigenfunctions for a given eigenvalue are scalar multiples of each other.
+\end{theorem}
+
+\begin{theorem}
+Eigenfunctions that correspond to distinct eigenvalues of the RSL BVP are orthogonal with respect to the weight function $r(x)$ on $[a,b]$.
+\end{theorem}
+
+\begin{theorem}
+Eigenvalues for the RSL BVP form a countable, increasing sequence
+\begin{equation*}
+    \lambda_1 < \lambda_2 < \lambda_3 < \dots
+\end{equation*}
+with $\lim\limits_{n \to \infty} \lambda_n = +\infty$
+\end{theorem}
+
+
+
+%--------------------------------------------%
+\section{Nonhomogeneous BVP and Fredholm Alternative}
+\begin{align}
+    L[y](x) & \equiv A_2(x)y''(x) + A_1(x)y'(x) + A_0(x)y(x) = h(x) \label{eq:diff-operator-nonhomo}\\
+    B_1[y] & \equiv a_{11}y(a) + a_{12}y'(a) + b_{11}y(b) + b_{12}y'(b) = 0 \\
+    B_2[y] & \equiv a_{21}y(a) + a_{22}y'(a) + b_{21}y(b) + b_{22}y'(b) = 0
+\end{align}
+
+\subsubsection{Formal Adjoint}
+For the differential operator above, \ref{eq:diff-operator-nonhomo}, the \textbf{formal adjoint} or Lagrange adjoint is the differential operator $L^+$.
+\begin{equation}
+    L^+[y] \equiv (A_2y)'' - (A_1y)' + A_0y
+\end{equation}
+
+\begin{theorem}[Lagrange's Identity]
+ Let L be the differential operator \ref{eq:diff-operator-nonhomo} and let $L^+$ be its formal adjoint. Then,
+ \begin{equation}
+     L[u]v - uL^+[v] = \frac{d}{dx}\Big[P(u,v)\Big]
+ \end{equation}
+ where $P(u,v)$, the \textbf{bilinear concomitant}, is defined as
+ \begin{equation}
+     P(u,v) \equiv uA_1v - u(A_2v)' +u'A_2v
+ \end{equation}
+\end{theorem}
+
+\begin{theorem}[Green's Formula]
+Green's formula can be written as
+  \begin{equation}
+      \langle L[u],v \rangle = \langle u, L^+[v] \rangle + P(u,v)\Big|_a^b
+  \end{equation}
+The adjoint boundary conditions can be determined by restricting to functions such that $P(u,v)\Big|_a^b=0$.
+\end{theorem}
+
+\subsubsection{Adjoint Boundary Value Problem}
+For the boundary conditions $B[u]=0$ of $L$, the \textbf{adjoint boundary value problem} is the boundary value problem
+\begin{equation} \label{eq:adjoint-bvp}
+    L^+[u]=0, \quad B^+[u]=0
+\end{equation}
+where $L^+$ is the formal adjoint of $L$ and $B^+$ are the conditions on $L^+$ imposed by Green's Formula.
+
+\begin{theorem}[Fredholm Alternative]\label{th:Fredholm-Alt}
+    Let $L$ be a linear differential operator and let $B$ represent a set of linear boundary conditions. The nonhomogeneous boundary value problem
+    \begin{equation}
+        \begin{array}{lr}
+             L[y](x)=h(x), & a<x<b \\
+             B[y] = 0 & 
+        \end{array}
+    \end{equation}
+    has a solution if and only if
+    \begin{equation}
+        \int_a^b h(x)z(x)dx = 0 
+    \end{equation}
+    for every solution $z$ of the adjoint boundary value problem
+    \begin{equation}
+        \begin{array}{lr}
+             L^+[z](x)=0, & a<x<b \\
+             B^+[z] = 0 & 
+        \end{array}
+    \end{equation}
+\end{theorem}
+
+
+
+%--------------------------------------------%
+\section{Solution by Eigenfunction Expansion}
+We want to solve the nonhomogeneous RSL BVP
+\begin{align} 
+    & L[y] + \mu r y = f \label{eq:RSL-operator-foreigs} \\
+    & a_1 y(a) + a_2 y'(a) = 0, \quad b_1y(b)+b_2y'(b)=0 \label{eq:RSL-BC-foreigs}
+\end{align}
+where $\mu$ is a fixed real number and 
+\begin{equation} \label{eq:RSL-operator-eig}
+    L[y] \equiv (py')' + qy
+\end{equation}
+
+\subsection*{Step 1: Find Orthogonal Eigenfunctions}
+A RSL being \textbf{self-adjoint} lets us write the homogeneous equation
+\begin{equation}\label{eq:selfadjoint-homo-RSL}
+    L[\phi_n] + \lambda_n r \phi_n = 0
+\end{equation}
+where the orthogonal eigenfunctions ${\phi_n}_{n=1}^\infty$ satisfy (\ref{eq:RSL-BC-foreigs}).
+
+We want the eigenfuntion expansion
+\begin{equation}\label{eq:eigenfunction-expansion-general}
+    \Phi(x) = \sum_{n=1}^{\infty} c_n \phi_n(x)
+\end{equation}
+
+\subsection*{Step 2: Compute Eigenfunction Expansion for $f/r$}
+This is computing the coefficients $\gamma_n$ with
+\begin{equation}\label{eq:gamma-eigexpand}
+    \gamma_n = \frac{\int_a^b{f\,\phi_n\,dx}}{\int_a^b{\phi^2_n\,dx}}
+\end{equation}
+
+\subsection*{Step 3: Check the Condition on $\mu$}
+There are then three results.
+\subsubsection{Case 1: $\mu\neq\lambda_n\;\forall\; n$}
+\begin{equation}\label{eq:eigenfunction-expansion-noproblem}
+    \Phi(x) = \sum_{n=1}^{\infty} \frac{\gamma_n}{\mu-\lambda_n} \phi_n(x)
+\end{equation}
+\subsubsection{Case 2: $\exists\, N\, :\, \mu=\lambda_N, \gamma_N=0$}
+\begin{equation}\label{eq:eigenfunction-expansion-noproblem}
+    \Phi(x) = c_N\phi_N + \sum_{\substack{n=1 \\ n\neq N}}^{\infty} \frac{\gamma_n}{\mu-\lambda_n} \phi_n(x)
+\end{equation}
+\subsubsection{Case 3: $\exists\, N\, :\, \mu=\lambda_N, \gamma_N \neq 0$}
+\begin{center}
+    No solution.
+\end{center}
+
+%--------------------------------------------%
+\section{Examples for Exam Questions}
+
+
+%--------------------------------------------%
+\subsection{First Question on Spring Exam}
+Could be Cauchy-Euler or other equation.
+
+\begin{equation}
+    y'' + 5y' + \lambda y = 0,\quad y(0)=0,\quad y(\pi)=0
+\end{equation}
+
+\begin{enumerate}
+    \item Find all real eigenvalues.
+    \item Find all corresponding eigenfunctions.
+    \item What is the orthonormal set of eigenfunctions?
+\end{enumerate}
+
+%--------------------------------------------%
+\subsubsection{Part 1: Eigenvalues}
+This equation is a second-order ODE with constant coefficients, so it has the auxiliary equation:
+\begin{equation*}
+    r^2 + 5r + \lambda = 0
+\end{equation*}
+The solutions then correspond to three cases in section \ref{sec:constcoef}.
+\begin{align*}
+    25 - 4\lambda>0 & \implies y(x) = c_1 e^{r_1 x} + c_2 e^{r_2 x}\\
+    4\lambda=25 & \implies y(x) = c_1 e^{r_0 x} + c_2 x e^{r_0 x}\\
+    25 - 4\lambda<0 & \implies y(x) = e^{\alpha x}[c_1 \cos \beta x + c_2 \sin \beta x]
+\end{align*}
+
+Using the boundary conditions, the first and second cases give trivial solutions, but the third case gives the information below.
+\begin{equation*}
+    y(0)=0 \implies c_1 = 0
+\end{equation*}
+\begin{equation*}
+    y(\pi)=0 \implies c_2 \sin \beta\pi = 0 \implies \beta = n
+\end{equation*}
+
+\begin{equation*}
+    2n = \sqrt{4\lambda - 25} \implies \lambda = \frac{4n^2+25}{4}, \quad n=0,1,2,\dots
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Part 2: Eigenfunctions}
+Use the solutions and eigenvalues above to get
+\begin{equation*}
+    y_n(x) = sin(n\pi)
+\end{equation*}
+
+
+%--------------------------------------------%
+\subsubsection{Part 3: Orthonormal Set}
+We have an orthogonal set, but it should be normalized.
+\begin{equation*}
+    \theta = \int_0^\pi y_n^2(x) \cdot dx = \int_0^\pi \sin^2(nx) \cdot dx = \frac{\pi}{2}
+\end{equation*}
+
+% Write set later
+
+%--------------------------------------------%
+\subsection{Second Question on Spring Exam}
+Convert the given differential equation to a Sturm-Liouville equation.
+\begin{equation}
+    (1-x^2)y'' - 2xy' + \lambda y = 0 
+\end{equation}
+\subsubsection{My Solution}
+One could recognize that $A_2'(x)=A_1(x)$ and immediately write the Sturm-Liouville form.
+\begin{equation} \label{eq:spring-exam2-sol2}
+    [(1-x^2)y']' + \lambda y = 0
+\end{equation}
+But this is not instructive, and there is no guarantee she will give one this obvious. First, we should identify the variables here.
+\begin{equation*}
+    A_2 = 1-x^2,\; A_1 = -2x,\; A_0=0,\; \rho=1
+\end{equation*}
+The integrating factor (\ref{eq:RSL-integratingfactor}) is then
+\begin{equation*}
+    \mu(x) = \frac{e^{\int{-2x/(1-x^2)dx}}}{1-x^2}
+\end{equation*}
+\begin{equation*}
+    \mu(x) = \frac{e^{\ln{(1-x^2)}}}{1-x^2} = 1
+\end{equation*}
+\begin{equation*}
+    \implies p(x) = (1-x^2), \; q(x) = 0, \; r(x) = 1
+\end{equation*}
+This gives the same result as (\ref{eq:spring-exam2-sol2}).
+
+%--------------------------------------------%
+\subsection{Third Question on Spring Exam}
+Find Formal-Adjoint problem.
+
+\begin{equation}
+    y''+y'+y=h,\quad y(0)=y(\pi),\quad y'(0)=y'(\pi)
+\end{equation}
+The following definitions will be given to find the Formal-Adjoint problem.
+\begin{equation*}
+    L^+[y] \equiv (A_2y)'' - (A_1y)' + A_0y
+\end{equation*}
+\begin{equation*}
+    A_2=1,\,A_1=1,\,A_0=1 \implies L^+[y] = y''-y'+y
+\end{equation*}
+
+\begin{align*}
+    P(u,v)|_{x=0}^\pi & = uv-uv'+u'v = 0 \\
+    & = u(\pi)v(\pi) - u(\pi)v'(\pi) + u'(\pi)v(\pi) - [u(0)v(0) - u(0)v'(0) + u'(0)v(0)]
+\end{align*}
+
+Eliminating using the conditions for $u$ gives you the conditions on $v$. $B^+$ is then
+\begin{align*}
+    v(\pi) & =v(0) \\
+    v'(\pi) & =v'(0)
+\end{align*}
+
+
+%--------------------------------------------%
+\subsection{Fourth Question on Spring Exam}
+Find a formal eigenfuntion expansion for the solution to the given differential equation.
+\begin{equation}
+    y''+ y = \sin x - 5\sin 3x
+\end{equation}
+Given the eigenfuntions and eigenvalues for given homogeneous boundary-value problem.
+\begin{equation*}
+    y''+ \lambda y = 0, \quad y(0) = y(L) = 0
+\end{equation*}
+\begin{equation*}
+    \implies \lambda_n = \bigg(\frac{n\pi}{L}\bigg)^2, \quad \phi_n(x) = \sin{\frac{n\pi}{L}x}
+\end{equation*}
+
+Writing the eigenfunction expansion as 
+\begin{equation*}
+    y(x) = \sum_{n=1}^\infty c_n \, \phi_n(x)
+\end{equation*}
+where
+\begin{equation*}
+    c_n \equiv \frac{\gamma_n}{\mu-\lambda_n}
+\end{equation*}
+
+The integration to find $\gamma_n$ is unnecessary in the given case. By observation, $\gamma_1=1$ and $\gamma_3=-5$ since the nonhomogeneous part are just scalar multiples of our eigenfunctions. We must check the condition that $\mu\neq\lambda_n \;\forall\; n$. Unfortunately, $\mu=\lambda_1=1$ if $L=\pi$ or $L=3\pi$.
+\begin{equation*}
+   \text{if } L=\pi,3\pi \text{, then } \mu = \lambda_1,\lambda_3 = 1,9;\; \gamma_1,\gamma_3\neq 0 \implies \text{No solution}
+\end{equation*}
+For all other values of $L$, the eigenfuntion expansion would be
+\begin{equation}
+    y(x) = \frac{1}{1-\frac{\pi^2}{L^2}}\sin{x} - \frac{5}{1-\frac{9\pi^2}{L^2}}\sin{3x}
+\end{equation}
+
+%--------------------------------------------%
+\subsection{In-Class Questions}
+
+These questions were done as a "quiz" in groups. The question is:
+
+\textit{Find a formal eigenfunction expansion for the solution to the given nonhomogeneous BVPs.}
+
+%--------------------------------------------%
+\subsubsection{Problem 1: $y''+2y=5\sin x -7\sin 3x,\quad y(0)=y(\pi)=0$}
+The adjoint boundary value problem is
+\begin{equation*}
+    y''+\lambda y =0, \quad y(0)=y(\pi)=0
+\end{equation*}
+This is a familiar eigenvalue problem with known solutions.
+\begin{equation*}
+    \lambda_n=n^2, \quad \phi_n(x) = \sin nx, \quad n=1,2,\dots
+\end{equation*}
+The eigenfunction expansion of $\Phi(x)=5\sin x -7\sin 3x$ is done with the sum below.
+\begin{equation*}
+    f(x) = \sum_{n=1}^\infty c_n \phi_n(x) \;:\; c_n=\frac{\gamma_n}{\mu-\lambda_n}
+\end{equation*}
+We must check the condition $\mu\neq\lambda_n \forall \,n$. In this problem, $\mu=2$ and $\lambda_n=n^2$ for positive integer $n$. This condition is true for all $n$, so we do have a solution.
+
+The next step is computing the $\gamma_n$.
+\begin{equation*}
+    \gamma_n \equiv \frac{\int_{a}^b f(x)\phi_n(x)\,dx}{\int_{a}^b \phi_n^2(x)\,dx} = \frac{\int_{0}^\pi (5\sin x -7\sin 3x)\sin nx \,dx}{\int_{0}^\pi \sin^2 nx\,dx}
+\end{equation*}
+The orthogonality of $\sin nx$ implies that
+\begin{equation*}
+    \gamma_n = \frac{\int_{0}^\pi (5\sin x -7\sin 3x)\sin nx \,dx}{\int_{0}^\pi \sin^2nx\,dx} = \left\{\begin{array}{rrl}
+        0, &  \text{for } & n \neq 1,3 \\
+        5, &  \text{for } & n = 1 \\
+        -7, &  \text{for } & n = 3
+        \end{array}\right. 
+\end{equation*}
+The eigenfunction expansion is then:
+
+\begin{equation*}
+    \Phi(x) = \sum_{n=1}^\infty c_n \phi_n(x) = \frac{\gamma_1}{2-\lambda_1}\sin x + \frac{\gamma_3}{2-\lambda_3}\sin 3x =  \frac{5}{2-1}\sin x - \frac{7}{2-9}\sin 3x
+\end{equation*}
+\boxedeq{sol:inclass1}{\Phi(x) = 5\sin x +\sin 3x}
+
+
+%--------------------------------------------%
+\subsubsection{Problem 2: $y''+4y=\sin 2x +\sin 8x,\quad y(0)=y(\pi)=0$}
+The problem has the same adjoint as the first, with solutions known.
+\begin{equation*}
+    \lambda_n=n^2, \quad \phi_n(x) = \sin nx, \quad n=1,2,\dots
+\end{equation*}
+We recognize orthogonality of the eigenfunction set gives $\gamma_n$.
+\begin{equation*}
+    \gamma_n = \left\{\begin{array}{rrl}
+        0, &  \text{for } & n \neq 2,8 \\
+        1, &  \text{for } & n = 2 \\
+        1, &  \text{for } & n = 8
+        \end{array}\right. 
+\end{equation*}
+Checking the condition $\mu\neq\lambda_n \forall \,n$ gives a different case though.
+\boxedeq{sol:inclass2}{\mu=\lambda_2 ,\; \gamma_2 \neq 0 \implies \text{ no solution}}
+
+
+
+%--------------------------------------------%
+\subsubsection{Problem 3: $y''+y=\cos{4x} +\cos{7x},\quad y'(0)=y'(\pi)=0$}
+This is a common eigenvalue problem with Neumann boundary conditions. The solutions are known to be
+\begin{equation*}
+    \phi_0=a_0; \quad \lambda_n=n^2, \quad \phi_n(x) = \cos{nx}, \quad n=1,2,\dots
+\end{equation*}
+The orthogonality of the eigenfunctions makes the values for $\gamma_n$ apparent.
+\begin{equation*}
+    \gamma_n = \left\{\begin{array}{rrl}
+        0, &  \text{for } & n \neq 4,7 \\
+        1, &  \text{for } & n = 4 \\
+        1, &  \text{for } & n = 7
+        \end{array}\right. 
+\end{equation*}
+Checking the condition $\mu\neq\lambda_n \forall \,n$, one sees that $\lambda_1=\mu=1$. But, $\gamma_1=0$ implies there is a solution with an undetermined constant on $\phi_1$.
+
+\begin{equation*}
+    \Phi(x) = \sum_{n=1}^\infty c_n \phi_n(x) = c_1\cos{x} + \frac{\gamma_4}{1-\lambda_4}\cos{4x} + \frac{\gamma_7}{1-\lambda_7}\cos{7x}
+\end{equation*}
+\boxedeq{sol:inclass3}{\Phi(x) = c_1\cos{x} - \frac{1}{15} \cos{4x} - \frac{1}{48}\cos{7x}}

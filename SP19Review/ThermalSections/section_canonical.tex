@@ -1,0 +1,31 @@
+\section{Canonical Formalism}
+
+\emph{Kittel \& Kroemer: Chapter 3}
+\begin{itemize}
+    \item Thermal reservoir
+    \item Weighting of states
+    \item When to use Canonical Formalism 
+    \item How to make partition function
+    \item How to use partition function to get expectation values
+\end{itemize}
+
+\subsection{Summary of Chapter}
+Consists of lots of definitions and derivations of thermal we learned in Callen.
+
+\textbf{Boltzmann Factor: } $e^{-\epsilon/\tau}$ gives the relative probability of a given configuration with energy $\epsilon$.
+
+\textbf{Partition Function (Z): } The sum of boltzmann factors for all states $s$ of a system, which allows the calculation of the absolute probability of a given configuration being occupied.
+\[
+Z(\tau) = \sum_{all} e^{-\epsilon_s/\tau} \implies \mathbb{P}(\epsilon_s) = \frac {e^{-\epsilon_s/\tau}}{Z}
+\]
+\textbf{Convenient relations with partition function: }
+\begin{align*}
+    U & = -\tau^2 \frac{\partial (F/\tau)}{\partial\tau} =  \tau^2 \frac{\partial (\log{Z})}{\partial\tau}\\
+    F & = -\tau \log{Z}
+\end{align*}
+
+\textbf{Expectation Values: } These are calculated in the normal way for probability mass functions. The interesting aspect is that these expectation values can be correlated with the macroscopic extensive variables observed.
+
+\[
+\mathbb{E}(X) = \sum_{all} X_n \mathbb{P}(X_n) 
+\]

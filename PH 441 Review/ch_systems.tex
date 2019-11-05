@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Simple Systems}
+%FILL
+
+%--------------------------------------------%
+\section{Infinite Square Well}
+\subsubsection{Problem}
+\begin{equation} \label{eq:infinite-potential}
+    V(x) = \left\{\begin{array}{rc}
+        0, &  0\leq x \leq a\\
+        \infty, & \text{otherwise}
+    \end{array}\right.
+\end{equation}
+
+\begin{equation}\label{eq:SE-infinitewell}
+    -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} = E\psi
+\end{equation}
+\subsubsection{Solutions and Energies}
+\begin{equation}\label{eq:infinitewell-solutions}
+    \psi_n(x) = \sqrt{\frac{2}{a}}\sin{\Big(\frac{n\pi}{a}x\Big)}
+\end{equation}
+\begin{equation}\label{eq:infinitewell-energies}
+    E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}
+\end{equation}
+
+%--------------------------------------------%
+\section{Harmonic Oscillator}
+This is a common method in physics that should be emphasized here.
+
+\begin{theorem}
+Any potential can be approximated as a harmonic oscillator near a local minimum.
+\end{theorem}
+
+The Schr{\"o}dinger Equation then becomes
+\begin{equation}\label{eq:HO-SE}
+    -\frac{\hbar}{2m} \frac{d^2\psi}{dx^2} + \frac{1}{2} m\omega^2 x^2 \psi = E \psi
+\end{equation}
+
+%--------------------------------------------%
+\subsection{Ladder Operators}
+I will write these in the books notation, but I think Dr. Harms notation makes more sense, especially after reading chapter 3.
+\begin{equation}\label{eq:ladderoperators}
+    \hat{a}_\pm \equiv \frac{1}{\sqrt{2\hbar m \omega}}(\mp i \hat{p} + m\omega x)
+\end{equation}
+\begin{equation*}
+    [\hat{a}_-, \hat{a}_+]=1
+\end{equation*}
+The two ladder operators being Hermitian conjugates implies\footnote{This is easier to write in Dirac notation.}
+\begin{equation*}
+    \expect{f|\hat{a}_\pm g} = \expect{\hat{a}_\mp f|g}
+\end{equation*}
+The following relations are also very useful.
+\begin{equation}\label{eq:ladderonpsi_n}
+    \hat{a}_+\psi_n = \sqrt{n+1}\psi_{n+1}, \quad \hat{a}_-\psi_n = \sqrt{n}\psi_{n-1}
+\end{equation}
+These make your life substantially easier.
+\begin{equation}\label{eq:ladders-x}
+    x = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a}_+ + \hat{a}_-)
+\end{equation}
+\begin{equation}\label{eq:ladders-p}
+    \hat{p} = i\sqrt{\frac{\hbar m \omega}{2}}(\hat{a}_+ - \hat{a}_-)
+\end{equation}
+
+\subsubsection{Wave Functions and Energies}
+\begin{equation}\label{eq:HO-groundstate}
+    \psi_0(x) = \Big(\frac{m\omega}{\pi\hbar}\Big)^{1/4} e^{-\frac{m\omega}{2\hbar}x^2}
+\end{equation}
+
+\begin{equation}\label{eq:HO-ladderedstates}
+    \psi_n(x) = \frac{1}{\sqrt{n!}} (\hat{a}_+)^n \psi_0(x)
+\end{equation}
+
+\begin{equation}\label{HO-energies}
+    E_n = \Big(n+\frac{1}{2}\Big)\hbar \omega
+\end{equation}
+
+
+%--------------------------------------------%
+\subsection{Hermite Polynomials}
+The analytic method using series solutions to differential equations gives a more complicated expression. These solutions are the \textbf{Hermite Polynomials}.
+\begin{equation}\label{eq:Hermite-def}
+    H_n(\xi) = (-1)^n \,e^{\xi^2} \Big(\frac{d}{d\xi}\Big)^n e^{-\xi^2}
+\end{equation}
+\subsubsection{Wave Functions}
+\begin{equation}\label{eq:HO-solutionswithhermites}
+    \psi_n(x) =  \frac{\alpha}{\sqrt{2^n n!}}H_n(\xi)e^{-\xi^2/2}
+\end{equation}
+\begin{equation}\label{eq:HO-alpha-xi}
+    \alpha \equiv \Big(\frac{m\omega}{\pi\hbar}\Big)^{1/4}, \quad \xi \equiv \sqrt{m\omega/\hbar}\;x
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Free Particle}
+\subsubsection{Problem}
+\begin{equation}\label{eq:SE-infinitewell}
+    -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} = E\psi
+\end{equation}
+\subsubsection{Solutions}
+\begin{equation}\label{eq:freeparticlewaves}
+    \Psi_k(x,t) = A e^{i(kx-\frac{\hbar k^2}{2m}t)}
+\end{equation}
+where
+\begin{equation*}
+    k\equiv \pm \frac{\sqrt{2mE}}{\hbar}
+\end{equation*}
+
+These are not normalizable though. We need to do some Fourier transforms\footnote{See equation \ref{eq:plancherels}.} to get valid solutions.
+
+\begin{equation}\label{eq:sol-free-transform}
+    \Psi(x,t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \phi(k)e^{i(kx-\frac{\hbar k^2}{2m}t)}dk
+\end{equation}
+where
+\begin{equation}\label{eq:free-sol-phi}
+    \phi(k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \Psi(x,0)e^{-ikx}dx
+\end{equation}
+
+%--------------------------------------------%
+\section{Delta-Function Potential}
+Recall the \textbf{Dirac delta function}.
+\begin{equation}\label{eq:diracdelta-def}
+    \delta(x) \equiv \left\{\begin{array}{rr}
+         0, & x\neq 0 \\
+         \infty & x=0
+    \end{array}\right.
+\end{equation}
+
+\subsubsection{Problem}
+\begin{equation}\label{eq:delta-potential}
+    V(x) = -\alpha \delta(x)
+\end{equation}
+
+\begin{equation}\label{eq:SE-delta}
+    -\frac{\hbar^2}{2m} \frac{d^2\psi}{dx^2} - \alpha\delta(x)\psi = E\psi
+\end{equation}
+
+\subsubsection{Bound State Solution}
+\begin{equation}\label{eq:delta-bound-sol}
+    \psi(x) = \frac{\sqrt{m\alpha}}{\hbar}e^{-m\alpha |x|/\hbar^2}
+\end{equation}
+
+\begin{equation} \label{eq:delta-bound-energy}
+    E = - \frac{m\alpha^2}{2\hbar^2}
+\end{equation}
+
+\subsubsection{Scattering States}
+There are \textit{scattering states} when $E>0$, but these get very complicated very quickly. Perhaps the reflection coefficient $R$ and transmission coefficient $T$ should be remembered.
+\begin{equation*}
+    R = \frac{1}{1+2\hbar^2 E/m\alpha^2}
+\end{equation*}
+
+\begin{equation*}
+    T = \frac{1}{1+m\alpha^2/2\hbar^2 E}
+\end{equation*}

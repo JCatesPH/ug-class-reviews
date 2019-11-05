@@ -1,0 +1,137 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Wave Diffraction and Reciprocal Lattice}
+The familiar condition for constructive interference in scattering is the \textbf{Bragg law}:
+\begin{equation}
+    2\, d\, \sin{\theta} = n\, \lambda, \quad \lambda \leq 2d
+\end{equation}
+We need a more sophisticated way to look at scattering though. Direct imaging of a lattice has a limit to its resolution, so indirect imaging is necessary.
+
+
+
+%--------------------------------------------%
+\section{Theory of Scattering}
+\emph{Elastic} scattering is considered in depth in this section. One should recall basic properties of waves, including diffraction, coherence, and \emph{Huygen's Principle.}
+\begin{definition}
+{Huygen's Principle}{Every point on a wavefront is itself a source of spherical waves}
+\end{definition}
+\begin{definition}
+{Coherent scattering}{Assume a fixed phase between primary and emitted waves.\footnote{Valid approximation for x-rays and neutrons.}}
+\end{definition}
+
+A plane wave with initial amplitude $A_0$, frequency $\omega_0$, and wave vector $\mathbf{k}_0$ at scattering center $P$ is
+\begin{equation*}
+    A_P(\mathbf{r}, t) = A_0 e^{i(\mathbf{k}_0\cdot(\mathbf{R}+\mathbf{r})-\omega_0 t)}
+\end{equation*}
+Where $\mathbf{R}$ points to the origin in the crystal, and $\mathbf{r}$ points from the origin to $P$. The detected wave at $B$, which is $\mathbf{R}'$ relative to the origin, can be written as
+\begin{equation*}
+    A_B(\mathbf{r}, t) = A_P(\mathbf{r}, t) \rho(\mathbf{r}, t) \frac{e^{ik|\mathbf{R}'-\mathbf{r}|}}{|\mathbf{R}'-\mathbf{r}|}
+\end{equation*}
+The total observed amplitude at time $t$ is 
+\begin{equation*}
+    A_B(t) = \frac{A_0}{R'} e^{i(\mathbf{k}_0\cdot\mathbf{R}+\mathbf{k}\cdot\mathbf{R}')}e^{-i\omega_o t}\int \rho(\mathbf{r}, t)e^{i(\mathbf{k}_0-\mathbf{k})\cdot \mathbf{r}} d\mathbf{r}
+\end{equation*}
+
+The \emph{intensity of scattered waves} for \emph{scattering vector} $\mathbf{K}=\mathbf{k}-\mathbf{k}_0$ with \emph{scattering amplitude} $\mathcal{A}(\mathbf{K})$ is
+\begin{equation*}
+    I(\mathbf{K}) \propto |A_B(t)|^2 \propto \bigg|\int \rho(\mathbf{r})e^{-i(\mathbf{K})\cdot \mathbf{r}} d\mathbf{r}\bigg|^2
+\end{equation*}
+
+
+%--------------------------------------------%
+\subsection{Fourier Transform of Lattice}
+The \emph{Fourier Transform} gives a powerful way to relate the \emph{scattering amplitude} and \emph{scattering density}.
+
+\begin{equation}
+    \mathcal{A}(\mathbf{K}) = \int \rho(\mathbf{r})e^{-i(\mathbf{K})\cdot \mathbf{r}} d\mathbf{r} \iff \rho(\mathbf{r}) = \frac{1}{(2\pi)^3} \int \mathcal{A}(\mathbf{K}) e^{i(\mathbf{K})\cdot \mathbf{r}} d\mathbf{K}
+\end{equation}
+
+This leads to the relation for discrete lattice points with set of vectors $\mathbf{G}$:
+\begin{equation}
+    \rho (\mathbf{r}) = \sum_\mathbf{G} \rho_\mathbf{G} e^{i\mathbf{G}\cdot \mathbf{r}}
+\end{equation}
+We need to construct 
+\begin{equation}
+    \mathbf{G} = h \,\mathbf{g}_1 + k \,\mathbf{g}_2 + l \,\mathbf{g}_3
+\end{equation}
+such that
+\begin{equation}
+    \mathbf{g}_i \cdot \mathbf{a}_j = 2\pi \delta_{ij}
+\end{equation}
+
+The \emph{reciprocal basis} $\mathbf{G}$, fulfills the condition above. The vectors have dimensions of inverse length, and these are in \emph{reciprocal space, k-space, or momentum space}. The standard basis is constructed by
+\begin{align*}
+    \mathbf{g}_1 & = 2\pi \frac{\mathbf{a}_2\times\mathbf{a}_3}{\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)} \\
+    \mathbf{g}_2 & = 2\pi \frac{\mathbf{a}_3\times\mathbf{a}_1}{\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)} \\
+    \mathbf{g}_3 & = 2\pi \frac{\mathbf{a}_1\times\mathbf{a}_2}{\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)} \\
+\end{align*}
+
+\begin{definition}
+{1st Brillouin Zone}{Wigner-Seitz cell in reciprocal space}
+\end{definition}
+\begin{definition}
+{Higher-order Brillouin Zones}{Wigner-Seitz cell construction for further neighbors in reciprocal space}
+\end{definition}
+
+
+
+%--------------------------------------------%
+\section{Scattering Condition}
+The last section gives us
+\begin{equation*}
+    I(\mathbf{K}) \propto |A_B(t)|^2 \propto \bigg|\sum_\mathbf{G} \rho_\mathbf{G} \int e^{i(\mathbf{G}-\mathbf{K})\cdot \mathbf{r}} d\mathbf{r}\bigg|^2
+\end{equation*}
+
+This relation implies the only contribution comes when $\mathbf{G}-\mathbf{K}=0$.
+
+
+%--------------------------------------------%
+\subsection{Laue Condition}
+\begin{definition}
+{Laue Condition}{$(\mathbf{G}=\mathbf{K})$ gives the cases when scattered beams are seen.}
+\end{definition}
+When the \emph{Laue Condition} is met, the intensity of diffracted beams is
+\begin{equation*}
+    I(\mathbf{K}=\mathbf{G}) \propto |A_B(t)|^2 \propto |\rho_\mathbf{G}|^2 V^2
+\end{equation*}
+
+\textbf{Sophisticated Bragg Condition:} Kittel manipulates the condition $\mathbf{G}-\mathbf{K}=0$ to get
+\begin{equation} \label{eq:bragg2}
+    2 \mathbf{k}\cdot \mathbf{G} = G^2
+\end{equation}
+which he says is the common expression for the condition for diffraction. Relate this to Bragg condition by noting the distance between parallel planes is $d(hkl)=2\pi/|\mathbf{G}|$.
+
+%--------------------------------------------%
+\subsubsection{Laue Equations}
+\textit{The Laue Equations} give a geometric condition that allows construction of an \textbf{Ewald Sphere}. They are
+\begin{equation*}
+    \mathbf{a}_1 \cdot \mathbf{K} = 2\pi v_1; \quad \mathbf{a}_2 \cdot \mathbf{K} = 2\pi v_2; \quad \mathbf{a}_3 \cdot \mathbf{K} = 2\pi v_3
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Brillouin Zones}
+The First Brillouin Zone is the Wigner-Seitz cell in reciprocal space. We can see a nice illustration of the diffraction condition if we divide \ref{eq:bragg2} by 4 on both sides.
+
+\begin{equation} 
+    \mathbf{k}\cdot (\mathbf{G}/2) = (G/2)^2
+\end{equation}
+
+In general, wave propagation is discussed in terms of the Brillouin Zone. \emph{Any wavevector starting at the origin and terminating on the surface of the Brillouin Zone will be diffracted.}
+
+
+
+%--------------------------------------------%
+\section{Reciprocal Lattices of Common Systems}
+It is a good idea to know the cubic lattices very well. These are most likely to be used in calculations for class.
+
+\subsection{Simple-Cubic Reciprocal Lattice}
+The primitive cell of the \emph{simple cubic} cell is itself, with lattice vectors:
+\begin{equation*}
+    \mathbf{a}_1 = a \hat{\mathbf{x}} \quad \mathbf{a}_2 = a \hat{\mathbf{y}} \quad \mathbf{a}_3 = a \hat{\mathbf{z}}
+\end{equation*}
+
+The reciprocal lattice vectors are the set
+\begin{equation*}
+    \mathbf{g}_1 = (2\pi/a) \hat{\mathbf{x}} \quad \mathbf{g}_2 = (2\pi/a) \hat{\mathbf{y}} \quad \mathbf{g}_3 = (2\pi/a) \hat{\mathbf{z}}
+\end{equation*}
+
+The \textbf{reciprocal lattice} of the simple-cubic lattice is \textit{another} simple-cubic lattice. This also implies that the first Brillouin zone is also the simple-cubic lattice in k-space.

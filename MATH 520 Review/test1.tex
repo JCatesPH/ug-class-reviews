@@ -1,0 +1,418 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of actual notes
+\chapter{The First Test}
+
+\begin{itemize}
+    \item Modeling of decision-making problems as linear programs. \\
+    \item Definitions of feasible, infeasible, unbounded problems, as well as
+certificates of each.\\
+    \item Standard forms (including conversion to SEF and SIF)\\
+    \item Canonical forms and tableaus corresponding to a given basis.\\
+    \item Definitions and characterizations of basic feasible solutions, convex
+and polyhedral sets, extreme points.\\
+\end{itemize}
+
+
+
+%--------------------------------------------%
+% First section in this chapter
+\section{Modeling as Linear Programs}
+Many practical problems, particularly in logistics or finance, can be written as a linear optimization problem. The goal is to construct constraints on the key variables based on the limitations in the problem. One seeks an \textbf{optimal value} with one or more \textbf{optimal solutions}. A \textbf{solution} is an assignment to the variables in the program, and a \textbf{feasible solution} is a solution that satisfies the constraints. The problems have the form:
+\begin{equation*}
+\begin{array}{ll@{}ll}
+\text{maximize}  & f(x) &\\
+\text{subject to}& g_1(x) & \leq 0 \\
+                 & g_2(x) & \leq 0 \\ 
+                 &        & \vdots \\
+                 & g_n(x) & \leq 0 \\
+                 & h_1(x) & = 0 \\
+                 & h_2(x) & = 0 \\
+                 &        & \vdots \\
+                 & h_n(x) & = 0 \\
+\end{array}
+\end{equation*}
+
+
+%--------------------------------------------%
+\subsection{Fundamental Theorem of Linear Programming}
+\begin{theorem}\label{FTLP}
+Exactly one of the following three conditions is true for any linear program:
+\begin{enumerate}
+    \item The problem is infeasible.
+    \item The problem is unbounded.
+    \item The problem has optimal solution(s).
+\end{enumerate}
+\end{theorem}
+
+
+%--------------------------------------------%
+\subsection{Certificates of Optimality}
+The optimality of a solution can be proved by proving that the objective function is bounded by the objective value of a feasible solution.
+
+
+%--------------------------------------------%
+\subsection{Certificates of Infeasibility}
+\begin{theorem}
+For any $\mathbf{A}\in \mathbf{R}^{m\times n}$ and $\mathbf{b}\in \mathbf{R}^{m}$, the linear system
+\begin{equation*}
+    \mathbf{Ax} = \mathbf{b}, \quad \mathbf{x} \geq \mathbf{0}
+\end{equation*}
+
+does not have a solution if there exists $\mathbf{y}\in \mathbf{R}^{m}$ such that
+    \begin{enumerate}
+        \item  \begin{center} $\mathbf{A}^T \mathbf{y} \geq \mathbf{0}$ \end{center}
+        \item  \begin{center} $\mathbf{b}^T \mathbf{y} < \mathbf{0}$ \end{center}
+    \end{enumerate}
+
+\end{theorem}
+
+
+%--------------------------------------------%
+\subsection{Certificates of Unboundedness}
+\begin{theorem}
+
+The linear program
+\begin{equation*}
+    \text{max } \{\mathbf{c}^T\mathbf{x} : \mathbf{Ax} = \mathbf{b}, \mathbf{x} \geq \mathbf{0} \}
+\end{equation*}
+
+is unbounded if there exists $\mathbf{\Bar{x}}\in \mathbf{R}^{n}$ and $\mathbf{d}\in \mathbf{R}^{n}$ such that
+    \begin{enumerate}
+        \item  \begin{center} $\mathbf{A} \mathbf{d} = \mathbf{0}$ \end{center}
+        \item  \begin{center} $\mathbf{d} \geq \mathbf{0}$ \end{center}
+        \item  \begin{center} $\mathbf{c}^T \mathbf{d} > \mathbf{0}$ \end{center}
+    \end{enumerate}
+    
+\end{theorem}
+
+
+
+%--------------------------------------------%
+\section{Standard Forms of Linear Programs}
+
+
+%--------------------------------------------%
+\subsection{Standard Equality Form}
+\begin{equation*}
+    \text{max } \{\mathbf{c}^T\mathbf{x} + z : \mathbf{Ax} = \mathbf{b}, \mathbf{x} \geq \mathbf{0} \}
+\end{equation*}
+\begin{equation*}
+    \mathbf{c} \in \mathbf{R}^n,\, \mathbf{b} \in \mathbf{R}^m,\, \mathbf{A} \in \mathbf{R}^{m\times n},\, z \in \mathbf{R}
+\end{equation*}
+
+The conditions for a problem to be in Standard Equality Form (SEF) are:
+\begin{enumerate}
+    \item \begin{center} \emph{(P)} is a maximization problem. \end{center}
+    \item \begin{center} Every variable is nonnegative. \end{center}
+    \item \begin{center} All other constraints are equalities. \end{center}
+\end{enumerate}
+
+
+%--------------------------------------------%
+\subsection{Equivalence of Linear Programs}
+
+We say that linear programs \emph{(P)} and \emph{(Q)} are equivalent if
+\begin{enumerate}
+    \item \emph{(P)} is infeasible $\iff$ \emph{(Q)} is infeasible 
+    \item \emph{(P)} is unbounded $\iff$ \emph{(Q)} is unbounded 
+    \item \emph{(P)}'s optimal solution provides an optimal solution to \emph{(Q)} 
+\end{enumerate}
+\textbf{All} linear programs are equivalent to one in SEF.
+
+
+%--------------------------------------------%
+\subsection{Converting to SEF}
+To put a problem into SEF, there are generally three steps.
+\begin{enumerate}
+    \item Change the problem to a maximization problem if it is not already.
+    \item Add nonnegativity constraints to variables without one.
+    \item Change inequality constraints to equality constraints.
+\end{enumerate}
+
+%--------------------------------------------%
+\subsubsection{Changing to Maximization Problem}
+The linear program 
+\begin{equation*}
+    \text{min } \{\mathbf{c}^T\mathbf{x} : \mathbf{Ax} = \mathbf{b}, \mathbf{x} \geq \mathbf{0} \}
+\end{equation*}
+is equivalent to the LP
+\begin{equation*}
+    \text{max } \{-\mathbf{c}^T\mathbf{x} : \mathbf{Ax} = \mathbf{b}, \mathbf{x} \geq \mathbf{0} \}
+\end{equation*}
+
+The two share feasible regions and optimal solutions. Multiplying the objective function of a minimization problem by -1 will yield the equivalent maximization problem.
+
+%--------------------------------------------%
+\subsubsection{Adding Nonnegativity Constraints}
+A \emph{free variable} in this context is one not required to be nonnegative. One may express any number $x\in \mathbf{R}$ as the difference of two nonnegative numbers.
+\begin{equation*}
+    \{x = x^+ - x^- :\; x^+, x^- \geq 0,\, x \in \mathbf{R}\}
+\end{equation*}
+
+The objective value and constraints can then be adjusted by plugging $x^+ - x^-$ in for $x$ wherever it appears in the objective function and constraints.
+
+%--------------------------------------------%
+\subsubsection{Changing Inequality Constraints to Equality Constraints}
+One can introduce \emph{slack variables} to satisfy an inequality constraint with an equality constraint. Generally, it is
+\begin{equation*}
+    \sum_{i=1}^n a_i x_i \leq \beta \longrightarrow \sum_{i=1}^n a_i x_i + x_{n+1} = \beta
+\end{equation*}
+
+or
+\begin{equation*}
+    \sum_{i=1}^n a_i x_i \geq \beta \longrightarrow \sum_{i=1}^n a_i x_i - x_{n+1} = \beta
+\end{equation*}
+
+\textbf{Note:} The new slack variables are nonnegative and do not contribute to the objective value.
+
+
+%--------------------------------------------%
+\subsection{Converting to Standard Inequality Form}
+Sometimes one wants a problem in Standard Inequality Form (SIF), which is
+\begin{equation*}
+    \text{max } \{\mathbf{c}^T\mathbf{x} : \mathbf{Ax} \leq \mathbf{b}, \mathbf{x} \geq \mathbf{0} \}
+\end{equation*}
+The process from above is primarily the same, except for the following steps.
+
+%--------------------------------------------%
+\subsubsection{Changing Greater Than to Less Than}
+This is simple as $\mathbf{a \cdot x}\geq b$ is equivalent to $(-\mathbf{a})\cdot\mathbf{x} \leq -b$
+
+%--------------------------------------------%
+\subsubsection{Changing Equality to Inequality}
+An equality $\mathbf{a \cdot x} = b$ is equivalent to two: $\mathbf{a}\cdot\mathbf{x} \leq b$ and $(-\mathbf{a})\cdot\mathbf{x} \leq -b$
+
+
+
+%--------------------------------------------%
+\section{Bases of Linear Systems}
+%--------------------------------------------%
+Let $A_j$ denote the jth column of $\mathbf{A}$. The subset $J \subseteq \{1,2,\hdots , n\}$ indexes the columns of $\mathbf{A}$. $J$ is a \emph{Basis} $B$ if the columns indexed by $J$ form a square, nonsingular matrix $A_B$ (columns are independent). \emph{Basic variables} are those in the set $\{x_j : j\in B\}$ and \emph{non-basic variables} are those not in that set. We label the vector formed by basic variables $\mathbf{x}_B$ and the vector of non-basic variables $\mathbf{x}_N$. This allows the constraints to be written in the form
+\begin{equation*}
+    \mathbf{Ax=b} \iff [\mathbf{A}_B | \mathbf{A}_N] [\mathbf{x}_B|\mathbf{x}_N]^T = \mathbf{b}
+\end{equation*}
+
+
+%--------------------------------------------%
+\subsection{Basic Solutions}
+A \emph{basic solution} can be found for a basis $B$ by setting $\mathbf{x}_N=\mathbf{0}$.
+\begin{equation*}
+    [\mathbf{A}_B | \mathbf{A}_N] [\mathbf{x}_B|\mathbf{x}_N]^T = \mathbf{b} \implies \mathbf{A}_B\mathbf{x}_B + \mathbf{A}_N \mathbf{x}_N = \mathbf{b}
+\end{equation*}
+\begin{equation*}
+    \mathbf{A}_B\mathbf{x}_B = \mathbf{b} \iff \mathbf{x}_B = \mathbf{A}_B^{-1}\mathbf{b}
+\end{equation*}
+This immediately gives the \emph{basic solution} $\mathbf{x}_B$. This solution is a \emph{basic feasible solution} if $\mathbf{x}_B \geq 0$ and infeasible otherwise. The basis $B$ is a \emph{feasible basis} if the basic solution is feasible. A \emph{degenerate basis} is one whose basic solution has more than $n-m$ zero entries.
+
+
+%--------------------------------------------%
+\subsection{Canonical Form}
+The linear program in SEF
+\begin{equation*}
+    \text{max } \{\mathbf{c}^T\mathbf{x} + z : \mathbf{Ax} = \mathbf{b}, \mathbf{x} \geq \mathbf{0} \}
+\end{equation*}
+is in \emph{canonical form for basis} $B$ if
+\begin{enumerate}
+    \item $\mathbf{A}_B = \mathbf{I}_m$
+    \item $\mathbf{c}_B = \mathbf{0}_m$
+\end{enumerate}
+This is given by the following
+\begin{align*}
+    & \text{max } z(\mathbf{x}) = \mathbf{y}^T\mathbf{b} + \Bar{z} + (\mathbf{c} - \mathbf{A}^T\mathbf{y})^T\mathbf{x} \\
+    & \text{s.t. }\mathbf{A}_B^{-1} \mathbf{A} \mathbf{b} = \mathbf{A}_B^{-1} \mathbf{b},\, \mathbf{x \geq 0}
+\end{align*}
+where $\mathbf{y}=\mathbf{A}_B^{-T}\mathbf{c}_B$.
+
+
+%--------------------------------------------%
+\subsection{Tableau Form for a Basis}
+A \emph{tableau} corresponding to basis $B$ is a linear system with variables $(\mathbf{x}, z)\in \mathbf{R}^{n+1}$, where
+\begin{enumerate}
+    \item Equations are solved for the basic variables.
+    \item Basic variables are eliminated from the objective row.
+    \item All variables on LHS of equation, with constants on RHS.
+\end{enumerate}
+This form can be found generally by
+\begin{equation*}
+    z - \sum_{j\in N} \Bar{c}_j x_j = \Bar{v}
+\end{equation*}
+\begin{equation*}
+    x_i - \sum_{j\in N} \Bar{a}_{ij} x_j = \Bar{b}_i \quad \forall \, i \in B
+\end{equation*}
+The tableau stores all the desired information for basis $B$, which are
+\begin{enumerate}
+    \item $\mathbf{x}_B = \Bar{b}$
+    \item $\Bar{\mathbf{x}}$ is a basic feasible solution if $\Bar{\mathbf{b}}\geq \mathbf{0}$
+    \item Objective value for $\Bar{\mathbf{x}}$ is $\Bar{v}$
+    \item If $\Bar{\mathbf{c}}_k > 0$, then increasing $x_k$ will increase the objective value. ($k\in N$)
+\end{enumerate}
+
+%--------------------------------------------%
+\subsubsection{Pivoting Tableau}
+We can create a new tableau from current. Suppose that variable $k$ enters basis $B$ and $r$ leaves.
+\begin{enumerate}
+    \item Eliminate $x_k$ from $i$th row.
+    \item Eliminate $x_k$ from objective row.
+    \item Rescale $r$th row.
+\end{enumerate}
+This process is \emph{pivoting} on position $(r,k)$ and gives the tableau for the new basis.
+
+
+
+%--------------------------------------------%
+\section{Geometry of Linear Optimization}
+Basic solutions correspond to the intersection of two or more constraints. Basic feasible solutions correspond to corner points in the feasible region. Now the properties of the feasible region are explored.
+
+
+%--------------------------------------------%
+\subsection{Convexity}
+For any $\mathbf{x,y}\in \mathbf{R}^n$ we let $[\mathbf{x, y}]$ denote the line segment between $\mathbf{x}$ and $\mathbf{y}$:
+\begin{equation*}
+    [\mathbf{x, y}] = \{(1-\lambda)\mathbf{x} + \lambda \mathbf{y} : \lambda \in [0,1] \}
+\end{equation*}
+
+A set $C$ is \emph{convex} if $\forall\, \mathbf{x, y}\in C$ the line segment $[\mathbf{x, y}]$ is also in $C$.
+
+In other words, set $C$ is \emph{convex} if and only if $\lambda\mathbf{x} + (1-\lambda) \mathbf{y} \in C$ for all $\mathbf{x, y}\in C$ and $\lambda \in [0,1]$.
+
+%--------------------------------------------%
+\subsubsection{Examples of Convex Sets}
+\begin{itemize}
+    \item All of $\mathbf{R}^n$ is convex.
+    \item Subspaces are convex.
+    \item The positive orthant $\{\mathbf{x}:x_i\geq 0\}$ is convex.
+    \item Half-spaces are convex.
+    \item A hyperplane is convex.
+\end{itemize}
+
+
+%--------------------------------------------%
+\subsection{Intersection of Convex Sets}
+\begin{theorem}
+The \emph{intersection} of (infinitely) many convex sets is also a convex set.
+\end{theorem}
+\begin{proof}
+Let $C=\cap_i C_i$, where $C_i$ are all convex.
+
+Suppose $x,y \in C$ and $\lambda \in [0,1]$.
+
+By definition of intersection $x,y \in C_i \; \forall\, i$
+
+Implying, $[x,y]\subseteq C_i$ by convexity of $C_i$.
+\begin{equation*}
+    \lambda x + (1-\lambda)y \in C_i \quad \forall\, i
+\end{equation*}
+
+Therefore, $[x,y]\subseteq \cap_i C_i \iff C$ is convex.
+\end{proof}
+
+%--------------------------------------------%
+\subsubsection{Connection to Feasible Region}
+The feasible region for a linear program is the intersection of half-spaces from inequality constraints, hyperplanes from equality constraints, and the positive orthant from nonnegativity constraints, which are all convex.
+
+
+%--------------------------------------------%
+\subsection{Polytopes}
+The set $P=\{\mathbf{x:Ax\leq b} \}$ is a \emph{polytope}.
+\begin{theorem}
+A polytope is the intersection of finitely many half-spaces.
+\end{theorem}
+A polytope is an $n$-dimensional shape with flat sides. In two dimensions, this is a polygon defined by line segments. In three dimensions, this is a polyhedron defined by polygons. An $n$-dimensional polytope is defined by $(n-1)$-dimensional polytopes.
+
+
+%--------------------------------------------%
+\subsection{Convexity of Optimal Solutions}
+\begin{theorem}
+The set of optimal solutions of a linear program is convex.
+\end{theorem}
+
+\begin{proof}
+Theorem \ref{FTLP} tells us that a linear program is either infeasible, unbounded, or has a set of optimal solutions.
+
+If a linear program is infeasible or unbounded, the solution set is the empty set $\O$.
+
+If a linear program has optimal solution $x^*$, the set of optimal solutions is $\{x\; : \;x \in F,\, c^Tx=c^Tx^*\}$, where $F$ is the feasible region. The set of optimal solutions is the intersection of the feasible region $F$ and the hyperplane $c^Tx=c^Tx^*$.
+
+$\therefore$ convexity of $F$ and $c^Tx=c^Tx^*$ $\implies$ convexity of solution set.
+\end{proof}
+
+
+%--------------------------------------------%
+\subsection{Convex Combinations}
+A vector $\mathbf{z} \in \mathbf{R}^n$ is a \emph{convex combination} of $\Vec{y}_1, \Vec{y}_2, \dots , \Vec{y}_m$ if there exists $\lambda_1, \lambda_2, \dots , \lambda_m \in [0,1]$ such that
+
+\begin{enumerate}
+    \item $\sum_{i=1}^m \lambda_i = 1$
+    \item $\Vec{z} = \lambda_1 \Vec{y}_1 + \lambda_2 \Vec{y}_2 + \dots + \lambda_m \Vec{y}_m$
+\end{enumerate}
+
+\begin{theorem}
+A set $C\subseteq \mathbf{R}^n$ is convex if and only if any convex combination of vectors in $C$ is contained in $C$.
+\end{theorem}
+
+
+%--------------------------------------------%
+\subsection{Extreme Points}
+A vector $\Vec{z}$ is \emph{properly contained} in a line segment if it is in the line segment, but not one of the end points. $\Vec{x},\Vec{y} \in C$
+\begin{equation*}
+    \Vec{z} \text{ is properly contained in } [\Vec{x}, \vec{y}] \Longleftarrow \exists \, \lambda \in (0,1) \; : \; \Vec{z} = \lambda \Vec{x} + (1-\lambda)\Vec{y}
+\end{equation*}
+A point $\Vec{w}$ is an \emph{extreme point} of $C$ if no line segment that properly contains $\Vec{w}$ is a subset of $C$. 
+\begin{equation*}
+    \Vec{w} \text{ is an extreme point } \Longleftarrow \nexists \, \lambda \in (0,1) \; : \;  \Vec{z} = \lambda \Vec{x} + (1-\lambda)\Vec{y}
+\end{equation*}
+
+\begin{theorem}[Krein-Milman-Caratheodory Theorem]
+If $C$ is a \emph{closed, convex,} and \emph{bounded} subset of $\mathbf{R}^n$ then it has an extreme point. 
+
+Every point in $C$ can be expressed as a convex combination of at most $n+1$ extreme points.
+\end{theorem}
+In this context, \emph{closed} means $C$ contains its boundary and \emph{bounded} means it is a subset of a larger set. The second statement can be summarized in three cases.
+\begin{enumerate}
+    \item An extreme point can be expressed as itself.
+    \item Lines between corners can be written as two corners combined.
+    \item Inner points are convex combinations of extremes.
+\end{enumerate}
+
+%--------------------------------------------%
+\subsubsection{Basic Feasible Solutions and Extreme Points}
+Suppose that $\mathbf{A}\in \mathbf{R}^{m\times n}$ has rank $m$ and let $F=\{\Vec{x}\,:\, \mathbf{Ax=b, x\geq 0}\}$ be the feasible region. 
+\begin{theorem}
+The basic feasible solution $\Bar{\mathbf{x}}$ is a basic feasible solution if and only if $\Bar{\mathbf{x}}$ is an extreme point of $F$. 
+\end{theorem}
+
+\begin{proof}[Sufficiency Proof] 
+Suppose $\Bar{\mathbf{x}}$ is a basic feasible solution for basis $B$. To prove by contradiction, suppose $\exists \, \Vec{x},\Vec{y} \in F, \lambda \in [0,1]$ such that
+\begin{equation*}
+    \Bar{\mathbf{x}} = \lambda \mathbf{x} + (1-\lambda) \mathbf{y} \quad \mathbf{x},\mathbf{y}\neq\Bar{\mathbf{x}}
+\end{equation*}
+The nonbasic entries give
+\begin{equation*}
+    \Bar{\mathbf{x}}_N = \lambda \mathbf{x}_N + (1-\lambda) \mathbf{y}_N = 0
+\end{equation*}
+All terms in $\mathbf{x}_N$ and $\mathbf{x}_N$ are nonnegative.
+\begin{equation*}
+    \therefore \;\mathbf{x}_N = \mathbf{y}_N = 0
+\end{equation*}
+This implies $\Vec{x},\Vec{y}$ must satisfy
+\begin{equation*}
+\mathbf{A}_B\mathbf{x}_B = \mathbf{A}_B\mathbf{y}_B = \mathbf{A}_B\mathbf{\Bar{x}}_B = \mathbf{b}
+\end{equation*}
+
+\begin{equation*}
+    \therefore \;\mathbf{\Bar{x}}_B = \mathbf{x}_B = \mathbf{y}_B = \mathbf{A}_B^{-1} \mathbf{b}
+\end{equation*}
+This contradicts the assumption that $\mathbf{\Bar{x}}$ is properly contained in $[\mathbf{x},\mathbf{y}]$.
+\end{proof}
+\textbf{Note:} The necessity proof is left out for now.
+
+\subsection{Tight Constraint}
+A constraint $\pmb{\alpha}^T\mathbf{x} \leq \beta$ is \emph{tight} for $\mathbf{\Bar{x}}$ if
+\begin{equation*}
+    \pmb{\alpha}^T\mathbf{\Bar{x}} = \beta
+\end{equation*}
+\begin{theorem}
+Let $P=\{\mathbf{x}\,:\,\mathbf{Ax\leq b}\}$ be a polytope and $\mathbf{\Bar{x}}\in P$. Let $\mathbf{A}^=\mathbf{x} = \mathbf{b}^=$ be the system of linear equations corresponding to tight constraints for $\mathbf{\Bar{x}}$.
+
+$\mathbf{\Bar{x}}$ is an extreme point of $P$ if and only if \textnormal{rank}$\mathbf{A}^= = n$
+\end{theorem}

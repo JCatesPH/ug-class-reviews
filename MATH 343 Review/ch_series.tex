@@ -1,0 +1,214 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Series Solutions to Diff. Eq.}
+
+
+
+%--------------------------------------------%
+\section{Taylor Series Representation}
+A real-valued, analytic function can be written as its Taylor series expansion.
+\begin{equation*}
+    y(x) = \sum_{n=0}^\infty \frac{y^{(n)}(x_0)}{n!} (x-x_0)^n
+\end{equation*}
+This series can be truncated to approximate the function with an error given by the remaining terms.
+
+
+%--------------------------------------------%
+\subsection{Commonly Seen Series}
+The Maclaurin series (Taylor series centered at $x_0 = 0$) are given for series that come up repeatedly.
+\begin{align*}
+    \sin x & = \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!} x^{2n+1} \\
+    \cos x & = \sum_{n=0}^\infty \frac{(-1)^n}{(2n)!} x^{2n} \\
+    e^x & = \sum_{n=0}^\infty \frac{x^n}{n!} 
+\end{align*}
+\begin{align*}
+    \ln (1+x) & = \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} x^{n}, \; |x|<1 \\
+    \frac{a}{1-r}  & = \sum_{n=0}^\infty a x^{n}, \; |x|<1 \\
+    \zeta (2n) & = \sum_{n=1}^\infty \frac{1}{k^{2n}} \\
+    \sinh x & = \sum_{n=0}^\infty \frac{x^{2n+1}}{(2n+1)!}  \\
+    \cosh x & = \sum_{n=0}^\infty \frac{ x^{2n}}{(2n)!} 
+\end{align*}
+
+This list can be extended further for binomial series, series with Bernoulli numbers, and other complex topics. \textbf{Also, see} \href{https://en.wikipedia.org/wiki/Laurent_series}{Laurent series.}
+
+
+%--------------------------------------------%
+\subsection{Properties of Series}
+Functions that can be expanded as a power series are called \emph{analytic}, and its power series is the Taylor series. A function being analytic means that its Taylor series converges in a region around every $x_0$, and its value and derivatives are defined on the entire domain. Power $f(x)$ and $g(x)$ are
+\begin{align*}
+    f(x) & = \sum_{n=0}^\infty a_n (x-x_0)^n \\
+    g(x) & = \sum_{n=0}^\infty b_n (x-x_0)^n
+\end{align*}
+
+%--------------------------------------------%
+\subsubsection{Radius of Convergence}
+The \emph{ratio test} gives the radius of convergence of a power series.
+\begin{equation*}
+    \rho \leq \lim_{n\longrightarrow \infty} \Big|\frac{a_n}{a_{n+1}}\Big|
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Adding and Subtracting Series}
+\begin{equation*}
+    f(x) \pm g(x) = \sum_{n=0}^\infty (a_n\pm b_n) (x-x_0)^n
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Multiplying Series}
+\begin{equation*}
+    f(x) \cdot g(x) = \sum_{n=0}^\infty c_n (x-x_0)^n
+\end{equation*}
+\begin{equation*}
+    c_n = \sum_{k=0}^n a_k b_{n-k}
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Differentiating Series}
+\begin{equation*}
+    f'(x) = \sum_{n=1}^\infty n\, a_n (x-x_0)^{n-1}
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Integrating Series}
+\begin{equation*}
+    \int f(x) = \sum_{n=0}^\infty \frac{a_n}{n+1} (x-x_0)^{n+1}
+\end{equation*}
+
+
+
+%--------------------------------------------%
+\section{Series Solutions to Linear Diff. Eq.}
+We seek solutions to \emph{linear, second-order differential equations with variable coefficients}.
+\begin{equation*}
+    a_2(x) y'' + a_1(x) y'+ a_0(x) y = 0
+\end{equation*}
+Which are written in \textbf{standard form:}
+\begin{equation*}
+    y'' + p(x) y'+ q(x) y = 0
+\end{equation*}
+\begin{equation*}
+    p(x) \equiv \frac{a_1(x)}{a_2(x)} \quad \quad  q(x) \equiv \frac{a_0(x)}{a_2(x)}
+\end{equation*}
+
+An \textbf{ordinary point} is when $p(x)$ and $q(x)$ are analytic, and it is a \textbf{singular point} when they are not. Note that initial values imply
+\begin{equation*}
+    a_0 = y(x_0) \quad \quad a_1 = y'(x_0)
+\end{equation*}
+
+
+%--------------------------------------------%
+\subsection{Homogeneous Solutions at Ordinary Points}
+The general solution about an ordinary point to the homogeneous equation
+\begin{equation} \label{eq:homo-variable}
+    a_2(x) y'' + a_1(x) y'+ a_0(x) y = 0
+\end{equation}
+is simply
+\begin{equation} \label{eq:vanilla-series}
+    f(x) = \sum_{n=0}^\infty a_n (x-x_0)^n 
+\end{equation}
+One differentiates the series using the method above and puts these results into the equation. One can then combine the series and solve for the coefficients.
+
+
+%--------------------------------------------%
+\subsection{Non-Homogeneous Solutions at Ordinary Points}
+The general solution about an ordinary point to the non-homogeneous equation 
+\begin{equation}
+    a_2(x) y'' + a_1(x) y'+ a_0(x) y = z(x)
+\end{equation}
+becomes
+\begin{equation}
+    y(x) = y_h(x) + y_p(x)
+\end{equation}
+The homogeneous solution is the same as Equation \ref{eq:vanilla-series}, and the particular solution is found by putting the homogeneous solution into the non-homogeneous equation. One expands the RHS if needed, then equates the LHS and RHS terms. \textbf{Note:} Initial values are put into the general solution, not the homogeneous or particular solution.
+
+
+%--------------------------------------------%
+\section{Method of Frobenius}
+A singular point $x_0$ is a \emph{regular singular point} if both
+\begin{align*}
+\begin{cases}
+& (x-x_0) \,p(x) \\
+& (x-x_0)^2 \,q(x) \\
+\end{cases}
+\end{align*}
+are analytic. Otherwise, $x_0$ is an \emph{irregular singular points.}
+
+Solutions to Equation \ref{eq:homo-variable} about a \emph{regular singular point} $x_0$ are\footnote{The differentiation of these series does not shift the index of the series, unlike differentiation for a normal power series.}
+\begin{equation} \label{eq:frobenius-series}
+    f(x) = \sum_{n=0}^\infty a_n (x-x_0)^{n+r}
+\end{equation}
+\textbf{To find r}, arrange terms to get an \emph{indicial equation} that can be solved for $r$. The indicial equation is the first nonzero term (usually $n=0$).
+\begin{equation*}
+    [\cdots]\, x^r = 0
+\end{equation*}
+The \emph{first solution} is taken to be the greater root of the indicial equation. There are three cases with linearly independent solutions.
+
+%--------------------------------------------%
+\subsubsection{Case 1: ($r_1-r_2$) is not an integer}
+\begin{align}
+    y_1(x) & = \sum_{n=0}^\infty a_n (x-x_0)^{n+r_1}\,,  & a_0 \neq 0 \\
+    y_2(x) & = \sum_{n=0}^\infty b_n (x-x_0)^{n+r_2}\,,  & b_0 \neq 0 
+\end{align}
+
+%--------------------------------------------%
+\subsubsection{Case 2: ($r_1=r_2$)}
+\begin{align}
+    y_1(x) & = \sum_{n=0}^\infty a_n (x-x_0)^{n+r_1}\,,  & a_0 \neq 0 \\
+    y_2(x) & = y_1(x) \ln(x-x_0) + \sum_{n=0}^\infty b_n (x-x_0)^{n+r_1}\,, & b_0  \neq 0 
+\end{align}
+
+%--------------------------------------------%
+\subsubsection{Case 3: ($r_1-r_2$) is an integer}
+\begin{align}
+    y_1(x) & = \sum_{n=0}^\infty a_n (x-x_0)^{n+r_1}\,,  & a_0 \neq 0 \\
+    y_2(x) & = C y_1(x) \ln(x-x_0) + \sum_{n=0}^\infty b_n (x-x_0)^{n+r_2}\,, & b_0  \neq 0 
+\end{align}
+
+\textbf{Note:} This table of cases will be given on an exam.
+
+
+%--------------------------------------------%
+\section{Cauchy-Euler Equation}
+Differential equations of the form
+\begin{equation} \label{eq:cauchy-euler}
+    a\, x^2\, y'' + b\, x\, y' + c\, y = 0
+\end{equation}
+The \emph{Method of Frobenius} gives the indicial equation
+\begin{equation} \label{eq:ce-indicial}
+    a\, r^2 + (b-a)\, r + c = 0
+\end{equation}
+The solutions simplify for values of $n\neq 0$.
+\begin{equation} \label{eq:ce-sol}
+    y(x) = a_0 x^r
+\end{equation}
+The values of $r$ give three cases listed here.
+\begin{equation*}
+    r_1,\,r_2 = \frac{-(b-a) \pm \sqrt{(b-a)^2-4ac}}{2a}
+\end{equation*}
+\begin{equation*}
+    \Delta \equiv (b-a)^2-4ac
+\end{equation*}
+
+%--------------------------------------------%
+\subsubsection{Real, distinct roots ($\Delta > 0$)}
+\begin{equation}
+    y(x) = c_1 x^{r_1} + c_2 x^{r_2} 
+\end{equation}
+
+%--------------------------------------------%
+\subsubsection{Repeated roots ($\Delta = 0$)}
+\begin{equation}
+    y(x) = c_1 x^{r_0} + c_2 x^{r_0} \ln x , \quad x > 0
+\end{equation}
+
+%--------------------------------------------%
+\subsubsection{Complex roots ($\Delta < 0$)}
+$r \equiv \alpha \pm i \beta$
+\begin{equation}
+    y(x) = c_1 x^{\alpha} \cos{(\beta \ln x)} + c_2 x^{\alpha} \sin{(\beta \ln x)}
+\end{equation}
+
+
+%--------------------------------------------%
+\section{Special Functions}
+Read section 8.8 in Nagle for this. I may fill this later, but it is not necessary for now. If you are interested in physics, then this section is essential. Legendre polynomials come up in undergraduate electrodynamics. Bessel functions, Laguerre polynomials, and Hermite polynomials are all used in undergraduate quantum mechanics as orthogonal sets of solutions.
+

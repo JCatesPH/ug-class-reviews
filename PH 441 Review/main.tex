@@ -1,0 +1,98 @@
+\documentclass[12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.25in]{geometry}
+% Packages for AMS math and symbols.
+\usepackage{amsmath}
+\usepackage{amssymb}
+% Package and settings for theorems and proofs.
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+% Package for including figures.
+\usepackage{graphicx}
+% Adds a therefore symbol.
+\def\therefore{\boldsymbol{\text{ }
+\leavevmode
+\lower0.4ex\hbox{$\cdot$}
+\kern-.5em\raise0.7ex\hbox{$\cdot$}
+\kern-0.55em\lower0.4ex\hbox{$\cdot$}
+\thinspace\text{ }}}
+
+% Imports package for appendix.
+\usepackage{appendix}
+
+% Shortcuts for common commands.
+\renewcommand*{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\sech}{sech}
+\newcommand{\expect}[1]{\ensuremath{\langle #1 \rangle}}
+
+% Package for hyperlinks.
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    %filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% Define new environment for definitions
+\newcounter{definition}[chapter]
+\newenvironment{definition}[2]
+    {\begin{flushleft}
+    \hspace{10pt}
+    \refstepcounter{definition}
+    \textbf{#1}: {\emph{#2}}
+    \end{flushleft}}
+
+% Increase spacing in tables.
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+
+%--------------------------------------------%
+\title{UA PH 441 Review}
+\author{Jalen Cates}
+\date{\today}
+%--------------------------------------------%
+
+\begin{document}
+%--------------------------------------------%
+% Possible additions:
+%   Chapter on 
+
+\maketitle
+\tableofcontents
+
+% Output the crystal structure chapter.
+\input{ch_background.tex}
+%--------------------------------------------%
+% Possible additions:
+%    Continuous pdf
+%    Look at linear algebra appendix of Griffiths
+%    Differential Equations Review
+%    Modern physics from start of 441:
+%       Blackbody Radiation
+%       Planck's Postulate
+%       Compton Effect
+%       Rutherford Model
+%       Bohr Model
+%       De Broglie Hypothesis
+%       Diffraction
+
+% Output the crystal structure chapter.
+\input{ch_basics.tex}
+%--------------------------------------------%
+% Possible additions:
+%    Expectation values and common operators
+%    General principles
+%    Commutation relations
+
+% Output the crystal structure chapter.
+\input{ch_systems.tex}
+%--------------------------------------------%
+% Possible additions:
+%  
+%   
+
+%\input{appendix.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

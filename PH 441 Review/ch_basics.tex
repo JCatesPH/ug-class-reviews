@@ -1,0 +1,177 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Basics and Formalism}
+%FILL
+
+
+
+%--------------------------------------------%
+\section{Schr{\"o}dinger Equation}
+Most of quantum mechanics is simply finding solutions to the Schr{\"o}dinger equation for different situations. The Schr{\"o}dinger Equation is
+\begin{equation} \label{eq:schro-general}
+    i \hbar \dfrac{\partial\Psi}{\partial t} = - \frac{\hbar^2}{2m} \frac{\partial^2 \Psi}{\partial x^2} + V\Psi
+\end{equation}
+or, more generally...
+\begin{equation} \label{eq:schro-general}
+    i \hbar \dfrac{\partial\Psi}{\partial t} = - \frac{\hbar^2}{2m} \nabla^2\Psi + V\Psi
+\end{equation}
+%--------------------------------------------%
+\subsubsection{Normalization of Solutions}
+\textit{Physically realizable states} are described by \textit{square-integrable} wave functions\footnote{I use the $^*$ as the complex conjugate in this equation to generalize the condition to complex-valued functions.}, such that
+\begin{equation} \label{eq:normalized}
+    \int_{-\infty}^{\infty} \Psi^*(x,t) \Psi(x,t) dx = 1
+\end{equation}
+%--------------------------------------------%
+\subsubsection{Statistical Interpretation}
+The integral in \ref{eq:normalized} on a finite interval $[a,b]$ can be interpreted as the probability to find the particle in that interval at time $t$.
+\begin{equation} \label{eq:normalized}
+    \int_{a}^{b} \Psi^*(x,t) \Psi(x,t) dx = \mathbf{P}(\Psi \in [a,b])
+\end{equation}
+
+\subsubsection{Standard Boundary Conditions}
+\begin{enumerate}
+    \item $\psi$ is always continuous
+    \item $d\psi/dx$ is continuous except at points where the potential is infinite
+\end{enumerate}
+
+%--------------------------------------------%
+\section{Stationary States}
+One can use the method of separation of variables to find \textbf{stationary states}. The wave function is then a linear superposition of the stationary states with "wiggle factors".
+\begin{equation} \label{eq:stationarystates}
+    \Psi(x,t) = \sum_{n=1}^\infty c_n \Psi_n(x,t) = \sum_{n=1}^\infty c_n \psi_n(x) e^{-iE_nt/\hbar}
+\end{equation}
+
+\subsection{Fourier's Trick}
+Griffiths calls this equation \textit{Fourier's trick}, but it is a normal thing in eigenfunction expansions for arbitrary differential equations.
+\begin{equation}\label{eq:fouriertrick}
+    c_n = \int \psi_n^*(x) f(x) \,dx
+\end{equation}
+Where $c_n$ are the coefficients in the eigenfunction expansion written as
+\begin{equation}\label{eq:eigenexpansion}
+    f(x) = \sum_{n=1}^\infty c_n \psi_n(x)
+\end{equation}
+
+
+%--------------------------------------------%
+\section{Bra-ket Notation}
+This has not been formally covered yet, but it is introduced in chapter 3 and is convenient to use. I prefer the organization of \textit{No-Nonsense Quantum Mechanics} by Jakob Schwichtenberg (\href{https://nononsensebooks.com/}{website}), where notations are introduced first.
+
+We can describe a quantum system using a \textbf{state vector} $|\Psi\rangle$, which is often called a \textbf{ket}. The state vector is a point in \textbf{Hilbert Space} that can be expanded in terms of eigenfunctions (or eigenstates).
+\begin{equation*}
+    |\Psi\rangle = \sum_{n=0}^\infty c_n |\psi_n\rangle
+\end{equation*}
+
+\textbf{Operators}, $\hat{O}$ denoted by hats, act on \textbf{eigenfunctions} to return the \textbf{eigenvalue} corresponding to that eigenfunction and operator.
+\begin{equation*}
+    \hat{O}|\psi_n\rangle = \lambda_n|\psi_n\rangle
+\end{equation*}
+The state vector expansion makes the relationship between the coefficients $c_n$ and the probability of an eigenstate. The probability of measuring a given eigenvalue is $|c_n|^2$. \textbf{Conjugated state vectors} or a \textbf{bra} is the \textit{Hermitian-conjugated ket}.
+\begin{equation*}
+    \langle \Psi | = |\Psi\rangle ^\dagger
+\end{equation*}
+
+The \textbf{orthonormal eigenfunction expansion} is straightforward in this notation.
+\begin{equation*}
+    \langle\psi_n|\Psi\rangle = \sum_m c_m \langle\psi_n|\psi_m\rangle = c_n
+\end{equation*}
+
+I will expand this later when we start chapter 3.
+
+
+
+%--------------------------------------------%
+\section{Operators}
+\subsubsection{Common Operators}
+\begin{equation}\label{eq:x-operator}
+    \expect{x} = \int \Psi^* [x]\Psi \,dx
+\end{equation}
+\begin{equation}\label{eq:x2-operator}
+    \expect{x^2} = \int \Psi^* [x^2]\Psi \,dx
+\end{equation}
+\begin{equation}\label{eq:p-operator}
+    \expect{p} = \int \Psi^* [-i\hbar\, \nabla]\Psi \,dx
+\end{equation}
+\begin{equation}\label{eq:p2-operator}
+    \expect{p^2} = \int \Psi^* [-\hbar^2\, \nabla^2]\Psi \,dx
+\end{equation}
+All dynamical quantities $Q$ can be written in terms of position of momentum.
+\begin{equation}\label{eq:q-operator}
+    \expect{Q(x,p)} = \int \Psi^* [Q(x,-i\hbar\, \partial/\partial x)]\Psi \,dx
+\end{equation}
+\begin{equation}\label{eq:T-operator}
+    \expect{T} = \int{ \Psi^* \Big[-\frac{\hbar^2}{2m}\, \nabla^2\Big]\Psi \,dx}
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Commutations}
+The \textit{commutator} is the expression here.
+\begin{equation}\label{eq:commutator}
+    [\hat{A},\hat{B}] \equiv \hat{A}\hat{B} - \hat{B}\hat{A}
+\end{equation}
+\subsubsection{Canonical Commutation Relation}
+\begin{equation}\label{eq:xp-commute}
+    [\hat{x},\hat{p}] = i\hbar
+\end{equation}
+\subsubsection{Other Commutation Relations}
+\begin{equation}\label{eq:et-commute}
+    [\hat{E},t] = i\hbar
+\end{equation}
+\begin{equation}\label{eq:ex-commute}
+    [\hat{E},x] = 0
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Uncertainty}
+\textbf{NOTE:} \textit{First, this is a general property of waves and is not a consequence of quantum mechanics! Second, it should also not be confused with observer effects!}
+
+%--------------------------------------------%
+\subsubsection{Heisenberg Uncertainty Principle}
+\begin{equation}\label{eq:heisenberg-uncertain}
+    \sigma_x \sigma_p \geq \frac{\hbar}{2}
+\end{equation}
+Where $\sigma_x,\, \sigma_p$ are defined in equation \ref{eq:stddev}. We will see how this comes from the commutation relation between observables in chapter 3.
+%--------------------------------------------%
+\subsubsection{Generalized Uncertainty Principle}
+\begin{equation}\label{eq:gen-uncertain}
+    \sigma_A^2\sigma_B^2 \geq \Big(\frac{1}{2i} \Big\langle [\hat{A},\hat{B}] \Big\rangle \Big)^2
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Noether's Theorem}
+You may remember this theorem from Butler's 332 class. The topic is also considered with increased rigor in graduate mechanics courses. It will be important later.
+
+\begin{theorem}
+    To every differentiable symmetry generated by local actions there corresponds a conserved current.
+\end{theorem}
+
+\begin{center}
+\begin{tabular}{lc}\label{tab:Noethers}
+    Symmetry & Conservation Law \\
+    \hline
+    Spatial Translation & Linear Momentum \\
+    Rotation            & Angular Momentum \\
+    Time Translation    & Energy
+\end{tabular}
+\end{center}
+
+
+%--------------------------------------------%
+\section{Ehrenfest Theorem}
+We have discussed this in class on a few occasions. A more general form for quantum operators is discussed in chapter 3, but the two cases shown at this point are 
+\begin{equation} \label{eq:ehrenfest-p}
+    m \frac{d\langle x\rangle}{dt} = \expect{p}
+\end{equation}
+\begin{equation} \label{eq:ehrenfest-f}
+    \frac{d\expect{p}}{dt} = -\Big\langle{\frac{dV}{dx}}\Big\rangle
+\end{equation}
+
+These give correspondence between the expectation values of quantum operators and the classical quantities they may represent. There is a \textbf{generalized Ehrenfest theorem} in chapter 3.
+
+\begin{equation} \label{eq:ehrenfest-gen}
+    \frac{d}{dt} \expect{Q} = \frac{i}{\hbar} \Big\langle{[\hat{H},\hat{Q}]}\Big\rangle + \Big\langle{\frac{\partial \hat{Q}}{\partial t}}\Big\rangle
+\end{equation}

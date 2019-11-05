@@ -1,0 +1,152 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Background}
+Quantum mechanics, like all areas of physics, requires comfort with many mathematical tools. In essence, quantum mechanics is partial differential equations with probability density function solutions or linear algebra in Hilbert space. The preface of Griffiths recommends \textit{Mathematical Methods in the Physical Sciences} by Mary Boas (\href{https://www.amazon.com/Mathematical-Methods-Physical-Sciences-Mary/dp/0471198269}{Amazon link}), but looking back (or forward) at math concepts is inevitable. Additionally, quantum mechanics is the final course sequence in undergraduate studies and integrates concepts from all other physics courses taken. If you are unfamiliar with a mechanics topic, then you should look in \textit{Classical Mechanics} by Taylor. Griffiths has a decent electrodynamics introductory text. Kittel has excellent books for those interested, \textit{Thermal Physics} and \textit{Introduction to Solid-State Physics}.
+
+
+
+%--------------------------------------------%
+\section{Basic Probability}
+Theory of Probability (MATH 355) is a helpful course, but that course is relatively easy and is not required. The theory of probability that we do will make you comfortable without a semester's worth of work on it.
+
+%--------------------------------------------%
+\subsection{Discrete Probability}
+The first thing to learn is how to calculate a probability. It is simple but important to note. Suppose there are $N$ possible, equally-probable events each denoted $\epsilon_n$. The probability of $\epsilon_n$ is then
+\begin{equation}
+    \mathbf{P}(\epsilon_n) = \frac{\epsilon_n}{\sum_{n=0}^N \epsilon_n}
+\end{equation}
+
+I write it in the suggestive form with $\epsilon_n$ because this is similar to the partition function seen in thermal physics. But this is a tangent at best. The sum of the probabilities \textit{must} equal unity.
+
+\begin{equation*}
+    \sum_{n=0}^N \mathbf{P}(\epsilon_n) = 1
+\end{equation*}
+
+Suppose we want to know the average of the measured value for a variable $\epsilon_n$. The \textit{expectation value} is then
+\begin{equation*}
+     \langle \epsilon_n \rangle = \sum_{n=0}^N \epsilon_n \cdot \mathbf{P}(\epsilon_n)
+\end{equation*}
+For a function of a variable $x$, the expectation value would be
+\begin{equation*}
+     \langle f(x) \rangle = \sum_{n=0}^N f(x) \cdot \mathbf{P}(x)
+\end{equation*}
+What is called the \textit{variance of a probability distribution function} is
+\begin{equation}
+    \sigma_x^2 = \langle x^2 \rangle - \langle x \rangle^2
+\end{equation}
+The \textit{standard deviation} is 
+\begin{equation} \label{eq:stddev}
+    \sigma_x = \sqrt{\langle x^2 \rangle - \langle x \rangle^2}
+\end{equation}
+
+
+%--------------------------------------------%
+%\subsection{Continuous Probability}
+
+
+
+%--------------------------------------------%
+%    Modern physics from start of 441:
+%       Relativistic Mechanics !
+%       Blackbody Radiation
+%       Planck's Postulate
+%       Compton Effect
+%       Rutherford Model
+%       Bohr Model
+%       De Broglie Hypothesis
+%       Diffraction
+%--------------------------------------------%
+\section{Heinrich Hertz Experiment (1887)}
+This experiment in 1887 found photons were causing a current that was incompatible with classical theory. They found the current had \textit{linear dependence on light intensity} and \textit{no dependence on frequency above a threshold.} Einstein explained this in 1905 as the \textbf{photoelectric effect.} A metal with work function $\phi=hf_0$, where $f_0$ is the threshold frequency, ejects electrons according to the equation here.
+\begin{equation}\label{eq:photoelectric}
+    K_{max} = h(f-f_0), \quad f>f_0
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Black-body Radiation (1900)}
+
+
+%--------------------------------------------%
+\subsection{Stefan-Boltzmann Law}
+For a \textit{black-body} with emissivity $e$ and temperature $T$, the intensity of radiation is given by
+\begin{equation} \label{eq:stefan-boltz}
+    I = \sigma e T^4
+\end{equation}
+where $\sigma$ is the Stefan-Boltzmann constant.
+\begin{equation} \label{stefan-boltz-const}
+    \sigma \equiv \frac{2\pi^5k^4}{15c^2h^3} = 5.67 \times 10^{-8} \, W\,m^{-2} K^{-4}
+\end{equation}
+
+
+%--------------------------------------------%
+\subsection{Rayleigh-Jeans Law}
+This is an approximation of the spectral radiance as a function of wavelength for a black body. It was the source of the \textit{ultraviolet catastrophe}, as it does not agree with observations at short wavelengths.
+\begin{equation} \label{eq:rayleigh-jeans}
+    I_\lambda(T) = \frac{8\pi kTc}{\lambda^4}
+\end{equation}
+
+
+%--------------------------------------------%
+\subsection{Planck's Law}
+Planck postulated that the electromagnetic waves were quantized (photons), and they must have energy $E=n\hbar\omega$.
+
+\begin{equation} \label{eq:planck-rad}
+    I_\lambda(T) = \frac{8\pi hc^2}{\lambda^5(e^{hc/\lambda kT}-1)}
+\end{equation}
+
+
+
+%--------------------------------------------%
+\section{Compton Effect (1923)}
+There was an extra wavelength peak in x-rays passing through gold foil. The relations for compton scattering are here.
+\subsubsection{Change in Wavelength}
+\begin{equation} \label{eq:compton-change}
+    \lambda - \lambda_0 = \frac{h}{m_0c}(1-\cos{\theta})
+\end{equation}
+\subsubsection{Compton Wavelength for Massive Particle}
+\begin{equation} \label{eq:compton-wavelength}
+    \lambda_c = \frac{h}{m_0c}
+\end{equation}
+
+%--------------------------------------------%
+\section{Rutherford-Bohr Model (1909,1913)}
+\subsubsection{Bohr Postulate}
+\begin{equation} \label{eq:bohr-postulate}
+    L = mvr = n\hbar
+\end{equation}
+
+\subsubsection{Bohr Radii and Energies}
+\begin{equation}\label{eq:bohr-radii}
+    r_n = \frac{n^2\hbar^2}{me^2}
+\end{equation}
+\begin{equation}\label{eq:bohr-energies}
+    E_n = - \frac{me^4}{2n^2\hbar^2}
+\end{equation}
+\textbf{Note: Dr. Harms writes these in Gaussian units. There is normally a factor of $4\pi\epsilon_0$ on the radii and a factor of $(4\pi\epsilon_0)^{-2}$ on the energies.}
+
+%--------------------------------------------%
+\section{de Broglie Hypothesis (1920)}
+A former philosophy student wrote his thesis to say massive particles obeyed the same relativistic relations as photons.
+\begin{equation} \label{eq:debroglie}
+    \lambda = \frac{h}{p}
+\end{equation}
+
+
+
+%--------------------------------------------%
+%\section{Scattering Theory}
+
+
+
+
+
+%--------------------------------------------%
+\section{Fourier Analysis}
+Will likely put more information here later.
+
+\subsection{Plancherel's Theorem}
+This theorem relates the Fourier transform and inverse Fourier transform.
+\begin{equation}\label{eq:plancherels}
+    f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty F(k)e^{ikx}dk \iff F(k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x)e^{-ikx}dx
+\end{equation}

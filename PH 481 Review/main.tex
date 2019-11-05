@@ -1,0 +1,82 @@
+\documentclass[12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.25in]{geometry}
+% Packages for AMS math and symbols.
+\usepackage{amsmath}
+\usepackage{amssymb}
+% Package and settings for theorems and proofs.
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+% Package for including figures.
+\usepackage{graphicx}
+% Adds a therefore symbol.
+\def\therefore{\boldsymbol{\text{ }
+\leavevmode
+\lower0.4ex\hbox{$\cdot$}
+\kern-.5em\raise0.7ex\hbox{$\cdot$}
+\kern-0.55em\lower0.4ex\hbox{$\cdot$}
+\thinspace\text{ }}}
+
+% Shortcuts for common commands.
+\renewcommand*{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\sech}{sech}
+
+% Package for hyperlinks.
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    %filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% Define new environment for definitions
+\newcounter{definition}[chapter]
+\newenvironment{definition}[2]
+    {\begin{flushleft}
+    \hspace{10pt}
+    \refstepcounter{definition}
+    \textbf{#1}: {\emph{#2}}
+    \end{flushleft}}
+
+% Increase spacing in tables.
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+
+%--------------------------------------------%
+\title{UA PH 481 Review}
+\author{Jalen Cates}
+\date{\today}
+%--------------------------------------------%
+
+\begin{document}
+%--------------------------------------------%
+% Possible additions:
+%   Chapter on bonding
+%   Chapter on Phonons 1
+
+\maketitle
+\tableofcontents
+
+% Output the crystal structure chapter.
+\input{ch_structure.tex}
+%--------------------------------------------%
+% Possible additions:
+%   Examples like NaCl and CsCl
+%   Figures
+
+
+% Output the chapter on reciprocal lattice.
+\input{ch_reciprocal.tex}
+%--------------------------------------------%
+% Possible additions:
+%   Ewald Sphere
+%   Structure Factor
+%   Laue Method and Rotating Crystal
+%   Reciprocal lattices
+
+
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

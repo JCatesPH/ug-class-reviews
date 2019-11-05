@@ -1,0 +1,42 @@
+
+\section{Conservation in Electrodynamics}
+
+\emph{Noether's Theorem} states, \emph{If there is a conservation law, the action is stationary under an infinitesimal transformation in an appropriate variable.} Which can be stated as the converse, \emph{If the action is stationary under an infinitesimal transformation, there is a corresponding conservation law.}\footnote{Schwinger et al. \emph{Classical Electrodynamics}}
+
+\begin{table}[!hbtp]
+    \centering
+    \begin{tabular}{c c}
+        \toprule
+        Transformed Variable  &  Conserved Quantity \\
+        \toprule
+        Time                  &  Energy             \\
+        Space                 &  Momentum           \\
+        Rotation              &  Angular Momentum   \\
+        Gauge change          &  Charge             \\
+    \end{tabular}
+    \caption{A table of conserved quantities and the variable that implies them. The left column is the variable undergoing an infinitesimal transformation, and the right column is the implied conservation law.}
+    \label{tab:conserve}
+\end{table}
+
+%\subsection{Conservation of Charge}
+% FILL
+% Div J = -d rho /dt
+
+
+\subsection{Conservation of Energy}
+This is a very consequential element of Griffiths' treatment of electrodynamics. The Energy for Electrostatics and Magnetostatics have been derived to be:\footnote{Note that these integrals are over all space, not the charge distribution.}
+
+\begin{align*}
+    W_e &= \frac{\epsilon_0}{2} \int E^2 d\tau \\
+    W_m &= \frac{\mu_0}{2} \int H^2 d\tau
+\end{align*}
+
+The energy density can be written in two ways in vacuum:
+
+\[
+u = \frac{1}{2} \Big( \epsilon_0 E^2 + \frac{1}{\mu_0} B^2 \Big)  \text{    OR    } u = \frac{1}{2} \Big( \epsilon_0 E^2 + \mu_0 H^2 \Big)
+\]
+and in \emph{linear} media it becomes:
+\[
+u = \frac{1}{2} \Big( \textbf{E} \cdot \textbf{D} + \textbf{H} \cdot \textbf{B} \Big)
+\]

@@ -1,0 +1,30 @@
+\section{Grand-Canonical Formalism}
+
+\emph{Kittel \& Kroemer: Chapter 5}
+\begin{itemize}
+    \item Know the Gibbs Sum \& Gibbs Factor
+    \item Use thermal, chemical reservoir
+    \item Construct Grand-Canonical partition function and compute expectation values
+\end{itemize}
+
+The Grand-Canonical Formalism is used to describe the states of a system in equilibrium with a thermal and chemical reservoir. The same arguments from the Canonical Formalism carries over.
+
+\textbf{Gibbs Factor:} Gives the relative probability of a state $s$ with occupation $N_s$ and energy $\epsilon_s$ by
+\[
+\exp{[(N_s\mu-\epsilon_s)/\tau]}
+\]
+
+\textbf{Gibbs Sum:} (OR Grand-Canonical Partition Function) sums all of the Gibbs Factor so one can calculate the absolute probability of a given state.
+\[
+\mathcal{Z} = \sum_{all} \exp{[(N_s\mu-\epsilon_s)/\tau]}
+\]
+This gives the probability as
+\[
+\mathbb{P}(x) = \frac{e^{(N_x\mu-\epsilon_x)/\tau}}{\sum_{all} e^{(N_s\mu-\epsilon_s)/\tau}}
+\]
+The expectation values are calculated in the usual way.
+
+\textbf{Absolute Activity:} Sometimes useful to use this lambda notation.
+\[
+\lambda \equiv e^{\mu/\tau}
+\]

@@ -1,0 +1,65 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Differential Equations 1 Review}
+One should know the meaning of \emph{differential equation}, \emph{order of differential equation}, and \emph{linearity of differential equations.} These should be intuitive at this point, so I leave out these notions. There were a lot of methods and applications covered in the first differential equations course; however, the most common ones are shown here.
+
+
+%--------------------------------------------%
+\section{First-order ODE with variable coefficients}
+Given a differential equation of the form
+\begin{equation}
+    y' + P(x) y = Q(x)
+\end{equation}
+where $y=f(x)$, the solutions are given by calculating an integration factor $\mu$.
+\begin{equation}
+    \mu(x) = \exp\Big[ \int P(x) dx \Big]
+\end{equation}
+Multiply the equation in standard form by $\mu$ to get
+\begin{equation*}
+    \mu(x) y' + \mu(x) P(x) y = \mu(x) Q(x)
+\end{equation*}
+\begin{equation}
+    \frac{d}{dx} \Big[\mu(x) y \Big] = \mu(x) Q(x)
+\end{equation}
+Which can be integrated and solved for $y$.
+
+
+%--------------------------------------------%
+\section{Second-order, homogeneous ODE with constant coefficients} \label{sec:constcoef}
+Given a differential equation of the form
+\begin{equation} \label{eq:homo-const}
+    a y'' + b y' + c y = 0
+\end{equation}
+The solutions are given by the \emph{auxiliary equation}.
+\begin{equation}
+    a r^2 + b r + c = 0
+\end{equation}
+Where the values for $r$ are placed in an exponential.
+\begin{equation}
+    y(t) = e^{rt}
+\end{equation}
+
+There are three cases explored below.
+
+%--------------------------------------------%
+\subsubsection{Real, distinct roots}
+When the solutions to the auxiliary are real and distinct, the general solution takes the form
+\begin{equation}
+    y(t) = c_1 e^{r_1 t} + c_2 e^{r_2 t}
+\end{equation}
+This is equivalent to the case that $b^2-4ac>0$.
+
+%--------------------------------------------%
+\subsubsection{Real, repeated roots}
+When the solutions to the auxiliary is one real root $r_0$, the general solution takes the form
+\begin{equation}
+    y(t) = c_1 e^{r_0 t} + c_2 t e^{r_0 t}
+\end{equation}
+This is equivalent to the case that $b^2-4ac=0$.
+
+%--------------------------------------------%
+\subsubsection{Complex roots}
+When the solutions to the auxiliary are complex numbers $r=\alpha \pm i \beta$, the general solution takes the form
+\begin{equation}
+    y(t) = c_1 e^{\alpha t} \cos{\beta t} + c_2 e^{\alpha t} \sin{\beta t} 
+\end{equation}
+This is equivalent to the case that $b^2-4ac<0$.
